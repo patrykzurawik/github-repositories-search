@@ -8,26 +8,24 @@ type FormFieldTextProps = FormFieldProps & {
 
 export default function FormFieldText ({
   field,
-  register,
-  errors,
+  error,
 }: FormFieldTextProps) {
-  const errorMessage = errors?.[field.name]?.message;
-  const isError = Boolean(errorMessage?.length);
+  const isError = Boolean(error);
 
   return (
     <>
       <input
+        name={field.name}
         type='text'
         aria-label={field.label}
         aria-invalid={isError}
         {...isError
-          ? { 'aria-describedby': errorMessage }
+          ? { 'aria-describedby': error }
           : null
         }
-        {...register(field.name)}
       />
 
-      {errors[field.name] && <p style={{ color: 'red' }}>{errors[field.name]?.message}</p>}
+
     </>
   );
 }

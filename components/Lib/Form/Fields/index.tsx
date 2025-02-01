@@ -1,27 +1,25 @@
-import { FieldError, FieldValues, UseFormRegister } from 'react-hook-form';
 import { FormField as FormFieldType, FormFieldTypeEnum } from 'types/form/fields';
 
 import FormFieldText from 'components/Lib/Form/Fields/FormFieldText';
 
 export type FormFieldProps = {
   field: FormFieldType;
-  errors: Record<FormFieldType['name'], FieldError>;
-  register: UseFormRegister<FieldValues>;
+  error: string | undefined;
 }
 
 export default function FormField ({
   field,
-  errors,
-  register,
+  error,
 }: FormFieldProps) {
 
   const fieldToRender = ({
-    [FormFieldTypeEnum.TEXT]: <FormFieldText field={field} register={register} errors={errors} />,
+    [FormFieldTypeEnum.TEXT]: <FormFieldText field={field} error={error} />,
   }[field.type]);
 
   return (
     <div className="form-field-wrapper">
       {fieldToRender}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 };
