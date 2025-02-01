@@ -1,0 +1,10 @@
+@property --color-glass {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: rgba(255, 255, 255, 0.05);
+}
+
+@mixin glass-effect {
+  background: var(--color-glass);
+  backdrop-filter: blur(.5rem);
+}
