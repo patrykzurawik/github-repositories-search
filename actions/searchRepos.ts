@@ -16,6 +16,7 @@ export const fetchCachedData = unstable_cache(
     const t = await getTranslations();
     const { success, data } = getSearchSchema(t).safeParse(params);
 
+    // TODO: handle better
     if (!success) {
       return {
         total_count: 0,
@@ -25,7 +26,6 @@ export const fetchCachedData = unstable_cache(
     }
 
     // return new Promise((resolve) => setTimeout(() => resolve([Math.random() * 101]), 3000));
-    // TODO: improve type
     return (await octokit.rest.search.repos(data)).data;
   },
   [],

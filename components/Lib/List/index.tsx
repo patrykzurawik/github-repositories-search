@@ -8,11 +8,13 @@ export type TListRow = Record<string, unknown>;
 export type TListProps <TRow = TListRow> = {
   data: TableProps<TRow>['data'];
   columns: TableProps<TRow>['columns'];
+  isLoading?: boolean;
 }
 
 export default function List ({ 
   data,
   columns,
+  isLoading,
 }: TListProps) {
   const [ items, setItems ] = useState<TListRow[]>(data);
 
@@ -30,6 +32,7 @@ export default function List ({
       columns={columns}
       data={items}
       onSort={handleSort}
+      progressPending={isLoading}
       sortServer
     />
   );

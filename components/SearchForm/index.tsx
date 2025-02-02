@@ -7,13 +7,13 @@ import { ROUTE_SEARCH } from 'constants/routes';
 import { FormField, FormFieldTypeEnum } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
 import { ReposSearchQueryParams } from 'types/repos';
-import { getSearchSchema } from 'validators/search';
+import { getSearchSchema, validateUnsafeSearchParams } from 'validators/search';
 
 import Form from 'components/Lib/Form';
 
 export default function SearchForm () {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const unsafeSearchParams = useSearchParams();
   const t = useTranslations();
 
   const fields: FormField[] = [
@@ -26,13 +26,11 @@ export default function SearchForm () {
     router.push(ROUTE_SEARCH(formState.data));
   };
 
-  const paramsAsObject = Object.fromEntries(searchParams.entries());
-  const { success, data } = schema.safeParse(paramsAsObject);
-
   let defaultValues: Partial<ReposSearchQueryParams> = {};
 
-  if (success) {
-    defaultValues = data;
+  const { success, params } = validateUnsafeSearchParams(unsafeSearchParams, t);
+  if (success && params) {
+    defaultValues = params;
   }
 
   return (
