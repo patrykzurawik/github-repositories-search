@@ -14,6 +14,7 @@ type FormProps = {
   schema: ZodSchema;
   action: (_values: z.infer<ZodSchema>) => Promise<FormState>;
   onSuccess: (_formState: FormStateSuccess<z.infer<ZodSchema>>) => unknown;
+  defaultValues?: Partial<z.infer<ZodSchema>>;
 }
 
 export default function Form ({
@@ -21,6 +22,7 @@ export default function Form ({
   action,
   schema,
   onSuccess,
+  defaultValues,
 }: FormProps) {
   const t = useTranslations();
   const {
@@ -28,6 +30,7 @@ export default function Form ({
     formState,
     handleSubmit,
   } = useForm<z.infer<typeof schema>>({
+    defaultValues,
     reValidateMode: 'onChange',
     resolver: zodResolver(schema),
   });

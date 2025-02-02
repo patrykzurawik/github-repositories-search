@@ -1,8 +1,6 @@
-import {
-  RestEndpointMethodTypes,
-} from '@octokit/plugin-rest-endpoint-methods/dist-types/generated/parameters-and-response-types';
+import type { Endpoints } from '@octokit/types';
 
-export type ReposSearchParams = typeof RestEndpointMethodTypes['search']['repos']['parameters'];
+export type ReposSearchParams = Endpoints['GET /search/repositories']['parameters'];
+export type ReposSearchResponse = Awaited<Endpoints['GET /search/repositories']['response']>;
 
-// TODO: extend type
-export type Repo = unknown;
+export type Repo = ReposSearchResponse['data']['items'][number];

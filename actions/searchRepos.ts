@@ -3,14 +3,14 @@
 import { unstable_cache } from 'next/cache';
 import { getTranslations } from 'next-intl/server';
 import octokit from 'lib/octokit';
-import { Repo, ReposSearchParams } from 'lib/octokit/types/repos';
+import { ReposSearchParams, ReposSearchResponse } from 'lib/octokit/types/repos';
 import { FormState } from 'types/form/state';
 import { ReposSearchQueryParams } from 'types/repos';
 import { getSearchSchema } from 'validators/search';
 import { z } from 'zod';
 
 export const fetchCachedData = unstable_cache(
-  async (params: ReposSearchParams): Promise<Repo[]> => {
+  async (params: ReposSearchParams): Promise<ReposSearchResponse> => {
     console.log('[getCachedRepos] ', JSON.stringify(params));
 
     const t = await getTranslations();
@@ -22,7 +22,7 @@ export const fetchCachedData = unstable_cache(
 
     // return new Promise((resolve) => setTimeout(() => resolve([Math.random() * 101]), 3000));
     // TODO: improve type
-    return (await octokit.rest.search.repos(data)) as unknown as Repo[];
+    return (await octokit.rest.search.repos(data)).data as ReposSearchResponse;
   },
   [],
   { revalidate: 60 * 60 }

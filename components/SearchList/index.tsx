@@ -1,36 +1,48 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { submit } from 'actions/searchRepos';
-import { ROUTE_SEARCH } from 'constants/routes';
-import { FormField, FormFieldTypeEnum } from 'types/form/fields';
-import { FormStateSuccess } from 'types/form/state';
-import { ReposSearchQueryParams } from 'types/repos';
-import { getSearchSchema } from 'validators/search';
+import { Repo } from 'lib/octokit/types/repos';
 
-import Form from 'components/Lib/Form';
+import List, { TListProps } from 'components/Lib/List';
 
-export default function SearchForm () {
-  const router = useRouter();
-  const t = useTranslations();
+type TSearchListProps = {
+  data: Repo[];
+}
 
-  const fields: FormField[] = [
-    { type: FormFieldTypeEnum.TEXT, name: 'q', label: t('SearchRepos.queryLabel') },
+export default function SearchList ({ data }: TSearchListProps) {
+  const t = useTranslations('Results.list');
+
+  const columns: TListProps<Repo>['columns'] = [
+    {
+      name: t('name'),
+      selector: (row) => row.full_name,
+      sortable: true,
+      sortField: 'name',
+    },
+    {
+      name: t('owner'),
+      selector: (row) => row.owner?.login ?? '',
+      sortable: true,
+      sortField: 'owner',
+    },
+    {
+      name: t('stars'),
+      selector: (row) => row.stargazers_count,
+      sortable: true,
+      sortField: 'stars',
+    },
+    {
+      name: t('createdAt'),
+      selector: (row) => row.created_at,
+      sortable: true,
+      sortField: 'created_at',
+    },
   ];
-  
-  const schema = getSearchSchema(t);
-  
-  const onSuccess = (formState: FormStateSuccess<ReposSearchQueryParams>) => {
-    router.push(ROUTE_SEARCH(formState.data));
-  };
 
   return (
-    <Form
-      fields={fields}
-      action={submit}
-      schema={schema}
-      onSuccess={onSuccess}
+    <List 
+      data={data}
+      columns={columns}
     />
   );
 }

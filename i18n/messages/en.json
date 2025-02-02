@@ -13,6 +13,12 @@
     "queryLabel": "Type repository name..."
   },
   "Results": {
-    "emptyQuery": "No query provided"
+    "emptyQuery": "No query provided",
+    "list": {
+      "name": "Name",
+      "owner": "Owner",
+      "stars": "Stars",
+      "createdAt": "Created"
+    }
   }
 }
