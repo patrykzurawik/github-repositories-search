@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { submit } from 'actions/searchRepos';
 import { ROUTE_SEARCH } from 'constants/routes';
 import { FormField, FormFieldTypeEnum } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
@@ -36,7 +35,6 @@ export default function SearchForm () {
   return (
     <Form
       fields={fields}
-      action={submit}
       schema={schema}
       onSuccess={onSuccess}
       defaultValues={defaultValues}

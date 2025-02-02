@@ -1,4 +1,4 @@
-import { fetchCachedData } from 'actions/searchRepos';
+import { fetchCachedData } from 'actions/repos';
 import { ReposSearchResponse } from 'lib/octokit/types/repos';
 import useSWR from 'swr';
 import { ReposSearchQueryParams } from 'types/repos';

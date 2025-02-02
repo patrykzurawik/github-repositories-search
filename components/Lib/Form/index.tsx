@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormField as FormFieldType } from 'types/form/fields';
-import { FormState, FormStateSuccess } from 'types/form/state';
+import { FormStateSuccess } from 'types/form/state';
 import { z, ZodSchema } from 'zod';
 
 import FormField from 'components/Lib/Form/Fields';
@@ -12,14 +12,12 @@ import FormField from 'components/Lib/Form/Fields';
 type FormProps = {
   fields: FormFieldType[];
   schema: ZodSchema;
-  action: (_values: z.infer<ZodSchema>) => Promise<FormState>;
   onSuccess: (_formState: FormStateSuccess<z.infer<ZodSchema>>) => unknown;
   defaultValues?: Partial<z.infer<ZodSchema>>;
 }
 
 export default function Form ({
   fields,
-  action,
   schema,
   onSuccess,
   defaultValues,
@@ -35,11 +33,11 @@ export default function Form ({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (values: z.infer<typeof schema>) => {
-    const formState = await action(values);
+  const onSubmit = async (unsafeData: z.infer<typeof schema>) => {
+    const { success, data } = schema.safeParse(unsafeData);
     
-    if (formState.isSuccess) {
-      return onSuccess?.(formState as FormStateSuccess);
+    if (success) {
+      return onSuccess?.({ isSuccess: success, data });
     }
   };
 
