@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { submit } from 'actions/searchRepos';
 import { ROUTE_SEARCH } from 'constants/routes';
@@ -13,7 +13,6 @@ import Form from 'components/Lib/Form';
 
 export default function SearchForm () {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const t = useTranslations();
 
   const fields: FormField[] = [
@@ -26,22 +25,12 @@ export default function SearchForm () {
     router.push(ROUTE_SEARCH(formState.data));
   };
 
-  const paramsAsObject = Object.fromEntries(searchParams.entries());
-  const { success, data } = schema.safeParse(paramsAsObject);
-
-  let defaultValues: Partial<ReposSearchQueryParams> = {};
-
-  if (success) {
-    defaultValues = data;
-  }
-
   return (
     <Form
       fields={fields}
       action={submit}
       schema={schema}
       onSuccess={onSuccess}
-      defaultValues={defaultValues}
     />
   );
 }
