@@ -20,11 +20,9 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout ({
-  search,
-  results,
+  children,
 }: Readonly<{
-  search: React.ReactNode;
-  results: React.ReactNode;
+  children: React.ReactNode;
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
@@ -35,8 +33,7 @@ export default async function RootLayout ({
         <NextIntlClientProvider messages={messages}>
           <main className={styles.wrapper}>
             <TopBar />
-            {search}
-            {results}
+            {children}
           </main>
         </NextIntlClientProvider>
       </body>

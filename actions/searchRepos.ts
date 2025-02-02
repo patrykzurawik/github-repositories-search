@@ -10,19 +10,23 @@ import { getSearchSchema } from 'validators/search';
 import { z } from 'zod';
 
 export const fetchCachedData = unstable_cache(
-  async (params: ReposSearchParams): Promise<ReposSearchResponse> => {
+  async (params: ReposSearchParams): Promise<ReposSearchResponse['data']> => {
     console.log('[getCachedRepos] ', JSON.stringify(params));
 
     const t = await getTranslations();
     const { success, data } = getSearchSchema(t).safeParse(params);
 
     if (!success) {
-      return [];
+      return {
+        total_count: 0,
+        items: [],
+        incomplete_results: false,
+      };
     }
 
     // return new Promise((resolve) => setTimeout(() => resolve([Math.random() * 101]), 3000));
     // TODO: improve type
-    return (await octokit.rest.search.repos(data)).data as ReposSearchResponse;
+    return (await octokit.rest.search.repos(data)).data;
   },
   [],
   { revalidate: 60 * 60 }
