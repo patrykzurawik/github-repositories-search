@@ -4,7 +4,11 @@ import useSWR from 'swr';
 import { ReposSearchQueryParams } from 'types/repos';
 
 export const useReposSearch = (params: ReposSearchQueryParams | null) => {
-  const { data, error, isLoading } = useSWR<ReposSearchResponse['data']>(
+  const {
+    data,
+    error,
+    isLoading,
+  } = useSWR<ReposSearchResponse['data']>(
     params
       ? ['fetchCachedRepos', params]
       : null,

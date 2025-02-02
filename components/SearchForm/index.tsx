@@ -27,8 +27,8 @@ export default function SearchForm () {
 
   let defaultValues: Partial<ReposSearchQueryParams> = {};
 
-  const { success, params } = validateUnsafeSearchParams(unsafeSearchParams, t);
-  if (success && params) {
+  const { isSuccess, data: params } = validateUnsafeSearchParams(unsafeSearchParams, t);
+  if (isSuccess && params) {
     defaultValues = params;
   }
 

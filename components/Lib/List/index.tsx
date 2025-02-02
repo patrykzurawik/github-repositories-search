@@ -9,19 +9,16 @@ export type TListProps <TRow = TListRow> = {
   data: TableProps<TRow>['data'];
   columns: TableProps<TRow>['columns'];
   isLoading?: boolean;
+  onSort?: TableProps<TRow>['onSort'];
 }
 
 export default function List ({ 
   data,
   columns,
   isLoading,
+  onSort,
 }: TListProps) {
   const [ items, setItems ] = useState<TListRow[]>(data);
-
-  const handleSort: TableProps<TListRow>['onSort'] = async (column, direction) => {
-    console.log('sort', { column, direction });
-    // setData(remoteData);
-  };
 
   useEffect(() => {
     setItems(data);
@@ -31,9 +28,11 @@ export default function List ({
     <DataTable
       columns={columns}
       data={items}
-      onSort={handleSort}
       progressPending={isLoading}
-      sortServer
+      { ...onSort
+        ? { onSort, sortServer: true }
+        : null
+      }
     />
   );
 }
