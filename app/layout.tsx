@@ -18,10 +18,13 @@ export const metadata: Metadata = {
   title: 'GitHub Search',
   description: 'Discover & Explore GitHub repos. Your gateway to the vast world of open-source code.',
 };
+
 export default async function RootLayout ({
-  children,
+  search,
+  results,
 }: Readonly<{
-  children: React.ReactNode;
+  search: React.ReactNode;
+  results: React.ReactNode;
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
@@ -32,7 +35,8 @@ export default async function RootLayout ({
         <NextIntlClientProvider messages={messages}>
           <main className={styles.wrapper}>
             <TopBar />
-            {children}
+            {search}
+            {results}
           </main>
         </NextIntlClientProvider>
       </body>

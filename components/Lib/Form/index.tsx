@@ -1,42 +1,57 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { FormField as FormFieldType } from 'types/form/fields';
-import { FormState } from 'types/form/state';
+import { FormState, FormStateSuccess } from 'types/form/state';
+import { z, ZodSchema } from 'zod';
 
 import FormField from 'components/Lib/Form/Fields';
 
 type FormProps = {
   fields: FormFieldType[];
-  serverAction: () => Promise<FormState>
+  schema: ZodSchema;
+  action: (_values: z.infer<ZodSchema>) => Promise<FormState>;
+  onSuccess: (_formState: FormStateSuccess<z.infer<ZodSchema>>) => unknown;
 }
 
 export default function Form ({
   fields,
-  serverAction,
+  action,
+  schema,
+  onSuccess,
 }: FormProps) {
   const t = useTranslations();
-  const [ state, action, isPending ] = useActionState<FormState, FormData>(serverAction, { isError: false });
+  const {
+    register,
+    formState,
+    handleSubmit,
+  } = useForm<z.infer<typeof schema>>({
+    reValidateMode: 'onChange',
+    resolver: zodResolver(schema),
+  });
 
-  const getFieldError = (field: FormFieldType) =>
-    state.errors?.[field.name];
-  
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    const formState = await action(values);
+    
+    if (formState.isSuccess) {
+      return onSuccess?.(formState as FormStateSuccess);
+    }
+  };
+
   return (
-    <form action={action}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       { fields.map((field, key) =>
         <FormField
           key={key}
           field={field}
-          error={getFieldError(field)}
+          register={register}
+          errors={formState.errors}
         />
       ) }
 
-      <button disabled={isPending}>{t('CTA.search')}</button>
-
-      <br />
-      <br />
-      <pre>{JSON.stringify(state, null, 2)}</pre>
+      <button type='submit'>{t('CTA.search')}</button>
     </form>
   );
 };

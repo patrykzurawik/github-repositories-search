@@ -1,11 +1,5 @@
-import SearchForm from 'components/SearchForm';
+import { Suspense } from 'react';
 
-import styles from './page.module.scss';
-
-export default function Home () {
-  return (
-    <div className={styles.wrapper}>
-      <SearchForm />
-    </div>
-  );
+export default function Page () {
+  return <Suspense fallback={<p>asdasdasdasd</p>} />;
 }

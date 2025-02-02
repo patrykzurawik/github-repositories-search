@@ -1,7 +1,4 @@
 {
-  "Search": {
-    "title": "GitHub Search"
-  },
   "CTA": {
     "search": "Search"
   },
@@ -10,5 +7,12 @@
     "string": "Must be a string",
     "min": "Insert at least {value} character(s)",
     "max": "Insert at most {value} character(s)"
+  },
+  "SearchRepos": {
+    "title": "GitHub Search",
+    "queryLabel": "Type repository name..."
+  },
+  "Results": {
+    "emptyQuery": "No query provided"
   }
 }
