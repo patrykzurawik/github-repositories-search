@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import { Mona_Sans } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { getLocale, getMessages } from 'next-intl/server';
 
-import styles from '@/app/layout.module.css';
+import TopBar from 'components/TopBar';
 
-import './globals.css';
+import 'styles/globals.css';
+import styles from './layout.module.scss';
 
 const MonaSanse = Mona_Sans({
   variable: '--font-mona-sans',
@@ -16,19 +19,26 @@ export const metadata: Metadata = {
   description: 'Discover & Explore GitHub repos. Your gateway to the vast world of open-source code.',
 };
 
-export default function RootLayout ({
-  children,
+export default async function RootLayout ({
+  search,
+  results,
 }: Readonly<{
-  children: React.ReactNode;
+  search: React.ReactNode;
+  results: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={MonaSanse.variable}>
-        <main className={styles.wrapper}>
-          <h1>GitHub Search</h1>
+  const locale = await getLocale();
+  const messages = await getMessages();
 
-          {children}
-        </main>
+  return (
+    <html lang={locale}>
+      <body className={MonaSanse.variable}>
+        <NextIntlClientProvider messages={messages}>
+          <main className={styles.wrapper}>
+            <TopBar />
+            {search}
+            {results}
+          </main>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

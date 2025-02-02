@@ -1,0 +1,1 @@
+export type ReposSearchQueryParams = { q: string };

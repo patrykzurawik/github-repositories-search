@@ -1,9 +1,5 @@
-import styles from './page.module.css';
+import { Suspense } from 'react';
 
-export default function Home () {
-  return (
-    <div className={styles.wrapper}>
-
-    </div>
-  );
+export default function Page () {
+  return <Suspense fallback={<p>asdasdasdasd</p>} />;
 }

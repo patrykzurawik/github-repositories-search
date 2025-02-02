@@ -1,0 +1,11 @@
+@use "styles/helpers";
+
+.wrapper {
+    @include helpers.glass-effect;
+
+    display: grid;
+    justify-items: center;
+    max-width: 80rem;
+    margin: auto;
+    gap: var(--gap);
+}
