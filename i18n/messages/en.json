@@ -13,7 +13,6 @@
     "queryLabel": "Type repository name..."
   },
   "Results": {
-    "emptyQuery": "No query provided",
     "list": {
       "name": "Name",
       "owner": "Owner",
