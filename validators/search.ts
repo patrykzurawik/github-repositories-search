@@ -1,31 +1,40 @@
-import { ReadonlyURLSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { DEFAULT_SEARCH_PARAMS } from 'constants/search';
 import { FormState } from 'types/form/state';
 import { ReposSearchQueryParams } from 'types/repos';
 import { z } from 'zod';
 
-export const getSearchSchema = (t: ReturnType<typeof useTranslations>) => z.object({
+export const getSearchSchema = (t?: ReturnType<typeof useTranslations>) => z.object({
   q: z
-    // TODO: restore custom message
-    // .string(t('Validators.string'))
     .string()
-    .min(3, t('Validators.min', { value: 3 }))
-    .max(256, t('Validators.string', { value: 256 })),
+    .min(3, t?.('Validators.min', { value: 3 }))
+    .max(256, t?.('Validators.max', { value: 256 })),
   sort: z
-    .string(),
-  // .nullish(),
+    .string()
+    .optional(),
   order: z
-    .string(),
-  // .nullish(),
+    .string()
+    .optional(),
+  page: z
+    .coerce
+    .string()
+    .optional(),
+  per_page: z
+    .coerce
+    .string()
+    .optional(),
 });
 
-export const validateUnsafeSearchParams = 
-  (unsafeSearchParams: ReadonlyURLSearchParams, t: ReturnType<typeof useTranslations>): FormState<ReposSearchQueryParams> => {
-    const paramsAsObject = Object.fromEntries(unsafeSearchParams.entries());
+export const validateUnsafeSearchQueryParams = 
+  (unsafeSearchQueryParams: Partial<ReposSearchQueryParams>, t?: ReturnType<typeof useTranslations>): FormState<ReposSearchQueryParams> => {
+    const { success, data } = getSearchSchema(t).safeParse({
+      ...DEFAULT_SEARCH_PARAMS,
+      ...unsafeSearchQueryParams,
+    });
 
-    const { success, data } = getSearchSchema(t).safeParse(paramsAsObject);
+    if (!success) {
+      return { isError: true };
+    }
 
-    return success  
-      ? { isSuccess: true, data }
-      : { isError: true };
+    return { isSuccess: true, data };
   };

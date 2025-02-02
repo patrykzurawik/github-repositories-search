@@ -6,7 +6,7 @@ import { ROUTE_SEARCH } from 'constants/routes';
 import { FormField, FormFieldTypeEnum } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
 import { ReposSearchQueryParams } from 'types/repos';
-import { getSearchSchema, validateUnsafeSearchParams } from 'validators/search';
+import { getSearchSchema, validateUnsafeSearchQueryParams } from 'validators/search';
 
 import Form from 'components/Lib/Form';
 
@@ -27,7 +27,7 @@ export default function SearchForm () {
 
   let defaultValues: Partial<ReposSearchQueryParams> = {};
 
-  const { isSuccess, data: params } = validateUnsafeSearchParams(unsafeSearchParams, t);
+  const { isSuccess, data: params } = validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t);
   if (isSuccess && params) {
     defaultValues = params;
   }

@@ -6,4 +6,6 @@ export const formatReposSearchQueryParamsForApi = (params: ReposSearchQueryParam
   ...(params.sort && params.order)
     ? { sort: params.sort, order: params.order }
     : null,
+  page: params.page,
+  per_page: params.per_page,
 });

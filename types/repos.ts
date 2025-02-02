@@ -12,6 +12,8 @@ export type ReposSearchQueryParamsWithSorting = {
 
 export type ReposSearchQueryParams = {
   q: ReposSearchParams['q'];
+  page?: ReposSearchParams['page'];
+  per_page?: ReposSearchParams['per_page'];
 } & (
   ReposSearchQueryParamsWithoutSorting
   | ReposSearchQueryParamsWithSorting

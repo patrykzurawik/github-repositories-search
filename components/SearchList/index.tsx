@@ -7,7 +7,7 @@ import { ROUTE_SEARCH } from 'constants/routes';
 import { Repo } from 'lib/octokit/types/repos';
 import { useReposSearch } from 'lib/queries/repos';
 import { ReposSearchQueryParams } from 'types/repos';
-import { validateUnsafeSearchParams } from 'validators/search';
+import { validateUnsafeSearchQueryParams } from 'validators/search';
 
 import List, { TListProps } from 'components/Lib/List';
 
@@ -16,8 +16,9 @@ export default function SearchList () {
   const router = useRouter();
   const unsafeSearchParams = useSearchParams();
 
-  const getValidatedParams = () => validateUnsafeSearchParams(unsafeSearchParams, t).data;
-  const [ params, setParams ] = useState(getValidatedParams());
+  const getValidatedParams = () =>
+    validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t).data as ReposSearchQueryParams;
+  const [ params, setParams ] = useState<ReposSearchQueryParams>(getValidatedParams());
 
   const columns: TListProps<Repo>['columns'] = [
     {
@@ -49,7 +50,10 @@ export default function SearchList () {
   ];
 
   const onSort: TListProps<Repo>['onSort'] = ({ sortField: sort }, order) =>
-    router.push(ROUTE_SEARCH({ ...params, sort, order }));
+    router.push(ROUTE_SEARCH({ ...params, sort, order, page: 1 }));
+
+  const onChangePage: TListProps<Repo>['onChangePage'] = (page) =>
+    router.push(ROUTE_SEARCH({ ...params, page }));
 
   const { data, isLoading } = useReposSearch(params
     ? params as ReposSearchQueryParams
@@ -67,8 +71,9 @@ export default function SearchList () {
       columns={columns}
       isLoading={isLoading}
       onSort={onSort}
-      defaultSortFieldId={'name'}
-      defaultSortAsc={true}
+      onChangePage={onChangePage}
+      paginationDefaultPage={params.page}
+      paginationTotalRows={data?.total_count}
     />
   );
 }
