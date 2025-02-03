@@ -1,0 +1,12 @@
+@use 'styles/helpers';
+
+.Wrapper {
+  @include helpers.glass-effect;
+  @include helpers.flex();
+}
+
+.SubmitButton {
+  border-top-left-radius: unset;
+  border-bottom-left-radius: unset;
+  font-size: var(--font-size-lg);
+}

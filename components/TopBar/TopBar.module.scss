@@ -1,7 +1,17 @@
-.header {
-  padding: var(--gap);
+@use 'styles/helpers';
+
+.Header {
+  @include helpers.glass-effect;
+  @include helpers.flex;
+
+  gap: var(--gap);
 }
 
-.name {
-  font-size: 2.5rem;
+.Logo {
+  width: auto;
+  height: calc(var(--font-size-xxl) + 5rem);
+}
+
+.Name {
+  font-size: var(--font-size-xxl);
 }

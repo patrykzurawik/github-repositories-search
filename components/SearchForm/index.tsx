@@ -1,18 +1,20 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { submit } from 'actions/searchRepos';
 import { ROUTE_SEARCH } from 'constants/routes';
 import { FormField, FormFieldTypeEnum } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
 import { ReposSearchQueryParams } from 'types/repos';
-import { getSearchSchema } from 'validators/search';
+import { getSearchSchema, validateUnsafeSearchQueryParams } from 'validators/search';
 
 import Form from 'components/Lib/Form';
 
+import styles from './SearchForm.module.scss';
+
 export default function SearchForm () {
   const router = useRouter();
+  const unsafeSearchParams = useSearchParams();
   const t = useTranslations();
 
   const fields: FormField[] = [
@@ -25,12 +27,20 @@ export default function SearchForm () {
     router.push(ROUTE_SEARCH(formState.data));
   };
 
+  let defaultValues: Partial<ReposSearchQueryParams> = {};
+
+  const { isSuccess, data: params } = validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t);
+  if (isSuccess && params) {
+    defaultValues = params;
+  }
+
   return (
     <Form
       fields={fields}
-      action={submit}
       schema={schema}
       onSuccess={onSuccess}
+      defaultValues={defaultValues}
+      className={styles.Form}
     />
   );
 }

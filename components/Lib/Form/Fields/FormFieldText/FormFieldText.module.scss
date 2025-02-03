@@ -1,0 +1,9 @@
+.Input {
+  height: var(--input-height);
+  font-size: var(--font-size-xl);
+  border-radius: var(--border-radius);
+  border-top-right-radius: unset;
+  border-bottom-right-radius: unset;
+  border-color: inherit;
+  padding: var(--gap-sm);
+}

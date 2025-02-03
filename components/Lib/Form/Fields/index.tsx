@@ -5,6 +5,8 @@ import { FormField as FormFieldType, FormFieldTypeEnum } from 'types/form/fields
 
 import FormFieldText from 'components/Lib/Form/Fields/FormFieldText';
 
+import styles from './FormFields.module.scss';
+
 export type FormFieldProps = {
   field: FormFieldType;
   register: UseFormRegister<FieldValues>;
@@ -23,7 +25,7 @@ export default function FormField ({
   }[field.type]);
 
   return (
-    <div className="form-field-wrapper">
+    <div className={styles.FormField}>
       {fieldToRender({ field, register, error })}
       {/*TODO: properly handle error message*/}
       {error && <p style={{ color: 'red' }}>{JSON.stringify(error.message)}</p>}

@@ -4,15 +4,27 @@
   },
   "Validators": {
     "required":"Required",
-    "string": "Must be a string",
     "min": "Insert at least {value} character(s)",
     "max": "Insert at most {value} character(s)"
   },
   "SearchRepos": {
     "title": "GitHub Search",
-    "queryLabel": "Type repository name..."
+    "queryLabel": "Type repository name...",
+    "meta": {
+      "title": "GitHub Search",
+      "description": "Discover & Explore GitHub repos. Your gateway to the vast world of open-source code."
+    }
   },
   "Results": {
-    "emptyQuery": "No query provided"
+    "list": {
+      "name": "Name",
+      "owner": "Owner",
+      "stars": "Stars",
+      "createdAt": "Created"
+    },
+    "meta": {
+      "title": "GitHub Search",
+      "description": "Discover & Explore GitHub repos. Your gateway to the vast world of open-source code."
+    }
   }
 }

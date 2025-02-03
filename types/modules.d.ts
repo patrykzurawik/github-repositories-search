@@ -1,1 +1,0 @@
-declare module '@octokit/plugin-rest-endpoint-methods/dist-types/generated/parameters-and-response-types';
