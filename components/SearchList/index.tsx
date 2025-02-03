@@ -17,8 +17,9 @@ export default function SearchList () {
   const unsafeSearchParams = useSearchParams();
 
   const getValidatedParams = () =>
-    validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t).data as ReposSearchQueryParams;
-  const [ params, setParams ] = useState<ReposSearchQueryParams>(getValidatedParams());
+    validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t).data ?? {};
+
+  const [ params, setParams ] = useState<Partial<ReposSearchQueryParams>>(() => getValidatedParams());
 
   const columns: TListProps<Repo>['columns'] = [
     {

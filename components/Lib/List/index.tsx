@@ -34,7 +34,7 @@ export default function List ({
 
   onSort,
 }: TListProps) {
-  const [ items, setItems ] = useState<TListRow[]>(data);
+  const [ items, setItems ] = useState<TListRow[]>(() => data);
 
   useEffect(() => {
     setItems(data);

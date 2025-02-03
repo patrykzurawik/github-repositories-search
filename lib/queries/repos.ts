@@ -4,18 +4,16 @@ import { ReposSearchResponse } from 'lib/octokit/types/repos';
 import useSWR from 'swr';
 import { ReposSearchQueryParams } from 'types/repos';
 
-export const useReposSearch = (params: ReposSearchQueryParams | null) => {
+export const useReposSearch = (params: Partial<ReposSearchQueryParams> | null) => {
   const {
     data,
     error,
     isLoading,
   } = useSWR<ReposSearchResponse['data']>(
-    params
+    params && Object.keys(params).length
       ? ['fetchCachedRepos', params]
       : null,
-    params
-      ? fetchCachedData.bind(null, formatReposSearchQueryParamsForApi(params as ReposSearchQueryParams))
-      : Promise.resolve
+    fetchCachedData.bind(null, formatReposSearchQueryParamsForApi(params as ReposSearchQueryParams))
   );
 
   return {
