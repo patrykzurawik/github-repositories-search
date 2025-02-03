@@ -3,12 +3,16 @@
 import { useEffect, useState } from 'react';
 import DataTable, { TableProps } from 'react-data-table-component';
 
+import { getTheme, styles } from './theme';
+
+getTheme();
+
 export type TListRow = Record<string, unknown>;
 
 export type TListProps <TRow = TListRow> =
-  Pick<TableProps<TRow>, 
-    'onChangePage' 
-    | 'paginationTotalRows' 
+  Pick<TableProps<TRow>,
+    'onChangePage'
+    | 'paginationTotalRows'
     | 'paginationDefaultPage'
     | 'paginationPerPage'
     | 'paginationRowsPerPageOptions'
@@ -19,6 +23,7 @@ export type TListProps <TRow = TListRow> =
   columns: TableProps<TRow>['columns'];
   isLoading?: boolean;
   onSort?: TableProps<TRow>['onSort'];
+  className?: string;
 }
 
 export default function List ({ 
@@ -33,6 +38,7 @@ export default function List ({
   paginationRowsPerPageOptions = [ 10, 20, 50, 100 ],
 
   onSort,
+  className,
 }: TListProps) {
   const [ items, setItems ] = useState<TListRow[]>(() => data);
 
@@ -48,17 +54,21 @@ export default function List ({
 
       pagination
       paginationServer
-      // TODO: pass actual page
       onChangePage={onChangePage}
       paginationTotalRows={paginationTotalRows ?? 0}
       paginationDefaultPage={Number(paginationDefaultPage)}
       paginationPerPage={Number(paginationPerPage)}
       paginationRowsPerPageOptions={paginationRowsPerPageOptions}
 
+      striped
+      theme='ghs'
+      customStyles={styles}
+
       { ...onSort
         ? { onSort, sortServer: true }
         : null
       }
+      className={className}
     />
   );
 }

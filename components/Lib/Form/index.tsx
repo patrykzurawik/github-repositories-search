@@ -3,17 +3,22 @@
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { clsx } from 'clsx';
 import { FormField as FormFieldType } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
 import { z, ZodSchema } from 'zod';
 
+import ButtonPrimary from 'components/Lib/Button/Primary';
 import FormField from 'components/Lib/Form/Fields';
+
+import styles from './Form.module.scss';
 
 type FormProps = {
   fields: FormFieldType[];
   schema: ZodSchema;
   onSuccess: (_formState: FormStateSuccess<z.infer<ZodSchema>>) => unknown;
   defaultValues?: Partial<z.infer<ZodSchema>>;
+  className?: string;
 }
 
 export default function Form ({
@@ -21,6 +26,7 @@ export default function Form ({
   schema,
   onSuccess,
   defaultValues,
+  className,
 }: FormProps) {
   const t = useTranslations();
   const {
@@ -42,7 +48,10 @@ export default function Form ({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form 
+      onSubmit={handleSubmit(onSubmit)}
+      className={clsx(styles.Wrapper, className)}
+    >
       { fields.map((field, key) =>
         <FormField
           key={key}
@@ -52,7 +61,12 @@ export default function Form ({
         />
       ) }
 
-      <button type='submit'>{t('CTA.search')}</button>
+      <ButtonPrimary
+        type='submit'
+        className={styles.SubmitButton}
+      >
+        {t('CTA.search')}
+      </ButtonPrimary>
     </form>
   );
 };

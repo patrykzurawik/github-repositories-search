@@ -1,21 +1,4 @@
-@property --color-background {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: #0d1117;
-}
-
-@property --color-text {
-  syntax: '<color>';
-  inherits: false;
-  initial-value: #fafbfc;
-}
-
-@property --gap {
-  /* TODO: check why '<length-percentage>' does not work as expected */
-  syntax: '*';
-  inherits: false;
-  initial-value: 1.5rem;
-}
+@use "vars";
 
 html,
 body {

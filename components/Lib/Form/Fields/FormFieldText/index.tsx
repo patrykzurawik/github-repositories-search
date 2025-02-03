@@ -5,6 +5,8 @@ import { FormFieldText as FormFieldTextType } from 'types/form/fields';
 
 import { FormFieldProps } from 'components/Lib/Form/Fields/index';
 
+import styles from './FormFieldText.module.scss';
+
 type FormFieldTextProps = Pick<FormFieldProps, 'register'> & {
   field: FormFieldTextType;
   error: FieldError;
@@ -27,6 +29,7 @@ export default function FormFieldText ({
         : field.label
       }
       {...register(field.name)}
+      className={styles.Input}
     />
   );
 }

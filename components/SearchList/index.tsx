@@ -11,6 +11,8 @@ import { validateUnsafeSearchQueryParams } from 'validators/search';
 
 import List, { TListProps } from 'components/Lib/List';
 
+import styles from './SearchList.module.scss';
+
 export default function SearchList () {
   const t = useTranslations();
   const router = useRouter();
@@ -67,7 +69,7 @@ export default function SearchList () {
   [ unsafeSearchParams ]);
 
   return (
-    <List 
+    <List
       data={data?.items}
       columns={columns}
       isLoading={isLoading}
@@ -75,6 +77,7 @@ export default function SearchList () {
       onChangePage={onChangePage}
       paginationDefaultPage={params.page}
       paginationTotalRows={data?.total_count}
+      className={styles.SearchList}
     />
   );
 }

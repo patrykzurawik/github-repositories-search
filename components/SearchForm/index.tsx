@@ -10,6 +10,8 @@ import { getSearchSchema, validateUnsafeSearchQueryParams } from 'validators/sea
 
 import Form from 'components/Lib/Form';
 
+import styles from './SearchForm.module.scss';
+
 export default function SearchForm () {
   const router = useRouter();
   const unsafeSearchParams = useSearchParams();
@@ -38,6 +40,7 @@ export default function SearchForm () {
       schema={schema}
       onSuccess={onSuccess}
       defaultValues={defaultValues}
+      className={styles.Form}
     />
   );
 }

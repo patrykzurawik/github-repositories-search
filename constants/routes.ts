@@ -15,5 +15,5 @@ export const ROUTE_SEARCH = (params: ReposSearchQueryParams) => {
     DEFAULT_SEARCH_PARAMS_ORDER
   );
 
-  return `/?${new URLSearchParams(sortedData).toString()}`;
+  return `/search?${new URLSearchParams(sortedData).toString()}`;
 };

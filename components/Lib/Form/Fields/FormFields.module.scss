@@ -1,0 +1,9 @@
+.FormField {
+  display: grid;
+  gap: var(--gap-sm);
+  width: min(50ch, 100%);
+
+  input {
+    width: 100%;
+  }
+}

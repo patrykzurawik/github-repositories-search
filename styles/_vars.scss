@@ -1,0 +1,73 @@
+/* TODO: check why '<length-percentage>' does not work as expected */
+
+@property --color-background {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #0d1117;
+}
+
+@property --color-background-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #2b3137;
+}
+
+@property --color-text {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #fafbfc;
+}
+
+@property --color-accent {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #2dba4e;
+}
+
+@property --color-glass {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: rgba(255, 255, 255, 0.05);
+}
+
+@property --gap {
+  syntax: '*';
+  inherits: false;
+  initial-value: 1.5rem;
+}
+
+@property --gap-sm {
+  syntax: '*';
+  inherits: false;
+  initial-value: .75rem;
+}
+
+@property --input-height {
+  syntax: '*';
+  inherits: false;
+  initial-value: 4rem;
+}
+
+@property --border-radius {
+  syntax: '*';
+  inherits: false;
+  initial-value: .5rem;
+}
+
+@property --font-size-lg {
+  syntax: '*';
+  inherits: false;
+  initial-value: 1.25rem;
+}
+
+@property --font-size-xl {
+  syntax: '*';
+  inherits: false;
+  initial-value: 1.75rem;
+}
+
+@property --font-size-xxl {
+  syntax: '*';
+  inherits: false;
+  initial-value: 4rem;
+}
