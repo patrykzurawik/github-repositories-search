@@ -2,14 +2,20 @@
 @use "sass:map";
 
 @mixin glass-effect {
-  width: 100%;
-  background: var(--color-glass);
-  border: 1px solid var(--color-glass-border);
-  backdrop-filter: blur(.5rem);
-  padding: var(--gap-sm);
+  & {
+    width: 100%;
+    background: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(.5rem);
+    padding: var(--gap-sm);
 
-  @include media-query-min(md) {
-    padding: var(--gap);
+    & {
+      @include media-query-min(md) {
+        & {
+          padding: var(--gap);
+        }
+      }
+    }
   }
 }
 
@@ -29,18 +35,26 @@ $orders: "start", "center", "end", "space-between", "stretch" !default;
   }
 
   @if $justify != null {
-    justify-content: $justify;
+    & {
+      justify-content: $justify;
+    }
   }
 
   @if $align != null {
-    align-items: $align;
+    & {
+      align-items: $align;
+    }
   }
 
-  display: flex;
-  flex-direction: $direction;
+  & {
+    display: flex;
+    flex-direction: $direction;
+  }
 
   @if $gap != null {
-    gap: $gap;
+    & {
+      gap: $gap;
+    }
   }
 }
 
@@ -57,19 +71,27 @@ $orders: "start", "center", "end", "space-between", "stretch" !default;
     @error "Invalid align-content: #{$align}. Allowed values: #{$orders}";
   }
 
-  display: grid;
-  grid-auto-flow: $direction;
+  & {
+    display: grid;
+    grid-auto-flow: $direction;
+  }
 
   @if $justify != null {
-    justify-items: $justify;
+    & {
+      justify-items: $justify;
+    }
   }
 
   @if $align != null {
-    align-content: $align;
+    & {
+      align-content: $align;
+    }
   }
 
   @if $gap != null {
-    gap: $gap;
+    & {
+      gap: $gap;
+    }
   }
 }
 
@@ -87,10 +109,10 @@ $breakpoints: (
 
 @mixin media-query-min($breakpoint) {
   @if not map.has-key($breakpoints, $breakpoint) {
-    @error "Invalid breakpoint: #{$breakpoint}. Allowed values: #{map-keys($breakpoints)}";
+    @error "Invalid breakpoint: #{$breakpoint}. Allowed values: #{map.keys($breakpoints)}";
   }
 
-  @media (min-width: map-get($breakpoints, $breakpoint)) {
-    @content;
-  }
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
 }

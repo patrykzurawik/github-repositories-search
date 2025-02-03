@@ -1,14 +1,14 @@
 'use client';
 
-import Particles from 'react-tsparticles';
-import { Engine, ParticlesOptions } from 'tsparticles-engine';
+import Particles, { IParticlesProps } from 'react-tsparticles';
+import { Engine } from 'tsparticles-engine';
 import { loadSlim } from 'tsparticles-slim';
 
 export default function ParticlesBackground () {
   const particlesInit = async (engine: Engine) =>
     await loadSlim(engine);
   
-  const options: ParticlesOptions = {
+  const options: IParticlesProps['options'] = {
     fpsLimit: 120,
     interactivity: {
       events: {

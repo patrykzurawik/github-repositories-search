@@ -12,13 +12,15 @@
 .Title {
   @include helpers.flex(column, center, center, var(--gap-xs));
 
-  text-align: center;
-  font-weight: bold;
-  color: var(--color-destructive);
+  & {
+    text-align: center;
+    font-weight: bold;
+    color: var(--color-destructive);
 
-  @include helpers.media-query-min(sm) {
-    @include helpers.flex(row, center, center, var(--gap-xs));
+    @include helpers.media-query-min(sm) {
+      @include helpers.flex(row, center, center, var(--gap-xs));
 
-    font-size: var(--font-size-xl);
+      font-size: var(--font-size-xl);
+    }
   }
 }

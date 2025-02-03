@@ -3,8 +3,10 @@
 .Wrapper {
     @include helpers.grid(row, stretch, start, var(--gap-sm));
 
-    max-width: 80rem;
-    min-height: 100dvh;
-    margin: auto;
-    padding: var(--gap-xs);
+    & {
+        max-width: 80rem;
+        min-height: 100dvh;
+        margin: auto;
+        padding: var(--gap-xs);
+    }
 }

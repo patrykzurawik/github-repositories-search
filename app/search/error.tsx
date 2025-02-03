@@ -2,7 +2,6 @@
 
 import React, { useEffect } from 'react';
 import { MdError } from 'react-icons/md';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 import ButtonSecondary from 'components/Lib/Button/Secondary';
@@ -14,7 +13,6 @@ export default function Error ({
   error: Error & { digest?: string }
 }) {
   const t = useTranslations();
-  const router = useRouter();
   
   useEffect(() => {
     console.error(error);
@@ -30,7 +28,7 @@ export default function Error ({
       {t('ErrorBoundary.title')}
     </span>
 
-    <ButtonSecondary onClick={() => router.refresh()}>
+    <ButtonSecondary onClick={() => document.location.reload()}>
       {t('CTA.tryAgain')}
     </ButtonSecondary>
   </div>;

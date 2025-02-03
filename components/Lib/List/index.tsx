@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import DataTable, { TableProps } from 'react-data-table-component';
 import { useTranslations } from 'next-intl';
 
@@ -12,7 +11,9 @@ import { getTheme, styles } from './theme';
 
 getTheme();
 
-export type TListRow = Record<string, unknown>;
+// TODO: fix type
+// eslint-disable-next-line
+export type TListRow = Record<string, unknown> & any;
 
 export type TListProps <TRow = TListRow> =
   Pick<TableProps<TRow>,
@@ -24,7 +25,6 @@ export type TListProps <TRow = TListRow> =
 >
   & {
   data: TableProps<TRow>['data'];
-  total: TableProps<TRow>['paginationTotalRows'];
   columns: TableProps<TRow>['columns'];
   isLoading?: boolean;
   onSort?: TableProps<TRow>['onSort'];
@@ -46,21 +46,16 @@ export default function List ({
   className,
 }: TListProps) {
   const t = useTranslations();
-  const [ items, setItems ] = useState<TListRow[]>(() => data);
   const totalRows = paginationTotalRows ?? 0;
   const isPending = isLoading || !Number.isSafeInteger(paginationTotalRows);
-
-  useEffect(() => {
-    setItems(data);
-  }, [data]);
-
+  
   return (
     <div className={className}>
       { totalRows > 0 && <ItemsCount totalRows={totalRows} /> }
 
       <DataTable
         columns={columns}
-        data={items}
+        data={data}
         progressPending={isPending}
         progressComponent={<Spinner />}
         noDataComponent={totalRows === 0 ?  <NoData /> : null}

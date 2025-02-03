@@ -10,7 +10,9 @@
   font-size: var(--font-size-lg);
   color: var(--color-text);
 
-  @include helpers.media-query-min(lg) {
-    font-size: var(--font-size-xl);
+  & {
+    @include helpers.media-query-min(lg) {
+      font-size: var(--font-size-xl);
+    }
   }
 }

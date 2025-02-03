@@ -3,11 +3,13 @@
 .Link {
   @include helpers.flex(row, start, center);
 
-  width: max-content;
-  color: inherit;
+  & {
+    width: max-content;
+    color: inherit;
 
-  &, &:hover {
-    text-decoration: none;
+    &, &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -15,7 +17,9 @@
   @include helpers.flex(row, center, center, var(--gap-sm));
 
   @include helpers.media-query-min(md) {
-    width: max-content;
+    & {
+      width: max-content;
+    }
   }
 }
 
@@ -23,8 +27,10 @@
   width: auto;
   height: var(--font-size-xxl);
 
-  @include helpers.media-query-min(lg) {
-    height: calc(var(--font-size-xxl) + 1rem);
+    @include helpers.media-query-min(lg) {
+      & {
+        height: calc(var(--font-size-xxl) + 1rem);
+      }
   }
 }
 
@@ -34,28 +40,32 @@
   text-align: center;
 
   @include helpers.media-query-min(lg) {
-    font-size: var(--font-size-xxl);
+    & {
+      font-size: var(--font-size-xxl);
+    }
   }
 }
 
 .Logo.Alternative {
   @include helpers.flex(column, center, center, var(--gap-xs));
 
-  .Image {
-    height: 5rem;
-  }
-
-  .Name {
-    font-size: var(--font-size-xxl);
-  }
-
-  @include helpers.media-query-min(md) {
-    .Name {
-      font-size: var(--font-size-xxxl);
+  & {
+    .Image {
+      height: 5rem;
     }
 
-    .Image {
-      height: 8rem;
+    .Name {
+      font-size: var(--font-size-xxl);
+    }
+
+    @include helpers.media-query-min(md) {
+      .Name {
+        font-size: var(--font-size-xxxl);
+      }
+
+      .Image {
+        height: 8rem;
+      }
     }
   }
 }

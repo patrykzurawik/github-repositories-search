@@ -62,13 +62,13 @@ export default function SearchList () {
     },
   ];
 
-  const onSort: TListProps<Repo>['onSort'] = ({ sortField: sort }, order) =>
-    router.push(ROUTE_SEARCH({ ...params, sort, order, page: 1 }));
+  const onSort: TListProps<Partial<Repo>>['onSort'] = ({ sortField: sort  }, order) =>
+    router.push(ROUTE_SEARCH({ ...params, sort: sort, order, page: 1 } as ReposSearchQueryParams));
 
-  const onChangePage: TListProps<Repo>['onChangePage'] = (page) =>
-    router.push(ROUTE_SEARCH({ ...params, page }));
+  const onChangePage: TListProps<Partial<Repo>>['onChangePage'] = (page) =>
+    router.push(ROUTE_SEARCH({ ...params, page } as ReposSearchQueryParams));
 
-  const { data, isLoading } = useReposSearch(params
+  const { data, isLoading, isError } = useReposSearch(params
     ? params as ReposSearchQueryParams
     : null
   );
@@ -81,9 +81,15 @@ export default function SearchList () {
   },
   [ validationResult ]);
 
+  useEffect(() => {
+    if (isError) {
+      throw new Error(isError);
+    };
+  }, [isError]);
+
   return (
     <List
-      data={data?.items}
+      data={data?.items ?? []}
       columns={columns}
       isLoading={isLoading || !data?.items}
       onSort={onSort}

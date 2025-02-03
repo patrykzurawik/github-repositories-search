@@ -14,5 +14,7 @@
 .Link {
   @include helpers.overflow-ellipsis();
 
-  color: inherit;
+  & {
+    color: inherit;
+  }
 }

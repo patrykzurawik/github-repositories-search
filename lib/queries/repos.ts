@@ -13,7 +13,11 @@ export const useReposSearch = (params: Partial<ReposSearchQueryParams> | null) =
     params && Object.keys(params).length
       ? ['fetchCachedRepos', params]
       : null,
-    fetchCachedData.bind(null, formatReposSearchQueryParamsForApi(params as ReposSearchQueryParams))
+    fetchCachedData.bind(null, formatReposSearchQueryParamsForApi(params as ReposSearchQueryParams)),
+    {
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    }
   );
 
   return {
