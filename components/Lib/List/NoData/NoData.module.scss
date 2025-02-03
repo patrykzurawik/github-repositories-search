@@ -1,0 +1,9 @@
+@use "styles/helpers";
+
+.NoData {
+  @include helpers.grid(row, center, center, var(--gap));
+}
+
+.Icon {
+  font-size: var(--font-size-xxl);
+}

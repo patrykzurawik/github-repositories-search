@@ -1,29 +1,96 @@
 @use "sass:list";
+@use "sass:map";
 
 @mixin glass-effect {
   width: 100%;
   background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
   backdrop-filter: blur(.5rem);
-  border-radius: var(--border-radius);
-  padding: var(--gap);
+  padding: var(--gap-sm);
+
+  @include media-query-min(md) {
+    padding: var(--gap);
+  }
 }
 
 $directions: "row", "column" !default;
-$orders: "start", "center", "end" !default;
-@mixin flex ($direction: row, $justify: center, $align: center) {
+$orders: "start", "center", "end", "space-between", "stretch" !default;
+@mixin flex ($direction: row, $justify: center, $align: center, $gap: null) {
   @if not list.index($directions, $direction) {
     @error "Invalid direction: #{$direction}. Allowed values: #{$directions}";
   }
-  @if not list.index($orders, $justify) {
+
+  @if $justify != null and not list.index($orders, $justify) {
     @error "Invalid justify-content: #{$justify}. Allowed values: #{$orders}";
   }
-  @if not list.index($orders, $align) {
+
+  @if $align != null and not list.index($orders, $align) {
     @error "Invalid align-items: #{$align}. Allowed values: #{$orders}";
+  }
+
+  @if $justify != null {
+    justify-content: $justify;
+  }
+
+  @if $align != null {
+    align-items: $align;
   }
 
   display: flex;
   flex-direction: $direction;
-  justify-content: $justify;
-  align-items: $align;
-  flex-wrap: wrap;
+
+  @if $gap != null {
+    gap: $gap;
+  }
+}
+
+@mixin grid ($direction: row, $justify: null, $align: null, $gap: null) {
+  @if not list.index($directions, $direction) {
+    @error "Invalid direction: #{$direction}. Allowed values: #{$directions}";
+  }
+
+  @if $justify != null and not list.index($orders, $justify) {
+    @error "Invalid justify-items: #{$justify}. Allowed values: #{$orders}";
+  }
+
+  @if $align != null and not list.index($orders, $align) {
+    @error "Invalid align-content: #{$align}. Allowed values: #{$orders}";
+  }
+
+  display: grid;
+  grid-auto-flow: $direction;
+
+  @if $justify != null {
+    justify-items: $justify;
+  }
+
+  @if $align != null {
+    align-content: $align;
+  }
+
+  @if $gap != null {
+    gap: $gap;
+  }
+}
+
+@mixin overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+$breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px
+) !default;
+
+@mixin media-query-min($breakpoint) {
+  @if not map.has-key($breakpoints, $breakpoint) {
+    @error "Invalid breakpoint: #{$breakpoint}. Allowed values: #{map-keys($breakpoints)}";
+  }
+
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
 }

@@ -28,7 +28,12 @@ export default function FormField ({
     <div className={styles.FormField}>
       {fieldToRender({ field, register, error })}
       {/*TODO: properly handle error message*/}
-      {error && <p style={{ color: 'red' }}>{JSON.stringify(error.message)}</p>}
+      {error && <p
+        role='alert'
+        style={{ color: 'red' }}
+      >
+        {JSON.stringify(error.message)}
+      </p>}
     </div>
   );
 };

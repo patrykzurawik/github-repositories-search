@@ -6,6 +6,7 @@ export type FormFieldBase = {
   type: FormFieldTypeEnum,
   name: string;
   label: string;
+  placeholder?: string;
 }
 
 export type FormFieldText = FormFieldBase & {

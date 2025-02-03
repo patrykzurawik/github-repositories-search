@@ -2,4 +2,15 @@
 
 .SearchList {
   @include helpers.glass-effect();
+
+  display: inline-grid;
+  justify-items: stretch;
+  align-items: center;
+  gap: var(--gap-sm);
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  & > div:first-child {
+    @include helpers.flex(column, center, center);
+  }
 }

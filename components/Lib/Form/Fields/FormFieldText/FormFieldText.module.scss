@@ -1,9 +1,16 @@
+@use "styles/helpers";
+
 .Input {
-  height: var(--input-height);
-  font-size: var(--font-size-xl);
   border-radius: var(--border-radius);
   border-top-right-radius: unset;
   border-bottom-right-radius: unset;
-  border-color: inherit;
+  border: 1px solid var(--color-accent);
+  background-color: var(--color-background);
   padding: var(--gap-sm);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+
+  @include helpers.media-query-min(lg) {
+    font-size: var(--font-size-xl);
+  }
 }

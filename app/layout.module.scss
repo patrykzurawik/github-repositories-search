@@ -1,11 +1,10 @@
 @use "styles/helpers";
 
 .Wrapper {
-    display: grid;
-    align-content: center;
-    justify-items: center;
+    @include helpers.grid(row, stretch, start, var(--gap-sm));
+
     max-width: 80rem;
     min-height: 100dvh;
     margin: auto;
-    gap: var(--gap);
+    padding: var(--gap-xs);
 }

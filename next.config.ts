@@ -6,8 +6,11 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
-    ppr: 'incremental',
-    // dynamicIO: true,
+  },
+  images: {
+    domains: [
+      'avatars.githubusercontent.com',
+    ],
   },
 };
 

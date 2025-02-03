@@ -24,16 +24,39 @@
   initial-value: #2dba4e;
 }
 
+@property --color-emphasis {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #4493F8;
+}
+
+@property --color-destructive {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #E46962;
+}
+
 @property --color-glass {
   syntax: '<color>';
   inherits: false;
   initial-value: rgba(255, 255, 255, 0.05);
 }
 
-@property --gap {
+@property --color-glass-border {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: rgba(255, 255, 255, 0.1);
+}
+
+@property --gap-xxs {
   syntax: '*';
   inherits: false;
-  initial-value: 1.5rem;
+  initial-value: .25rem;
+}
+@property --gap-xs {
+  syntax: '*';
+  inherits: false;
+  initial-value: .5rem;
 }
 
 @property --gap-sm {
@@ -42,10 +65,22 @@
   initial-value: .75rem;
 }
 
+@property --gap {
+  syntax: '*';
+  inherits: false;
+  initial-value: 1.5rem;
+}
+
+@property --gap-lg {
+  syntax: '*';
+  inherits: false;
+  initial-value: 3rem;
+}
+
 @property --input-height {
   syntax: '*';
   inherits: false;
-  initial-value: 4rem;
+  initial-value: 2.25em;
 }
 
 @property --border-radius {
@@ -57,17 +92,29 @@
 @property --font-size-lg {
   syntax: '*';
   inherits: false;
-  initial-value: 1.25rem;
+  initial-value: 1.1rem;
 }
 
 @property --font-size-xl {
   syntax: '*';
   inherits: false;
-  initial-value: 1.75rem;
+  initial-value: 1.25rem;
 }
 
 @property --font-size-xxl {
   syntax: '*';
   inherits: false;
+  initial-value: 2rem;
+}
+
+@property --font-size-xxxl {
+  syntax: '*';
+  inherits: false;
   initial-value: 4rem;
+}
+
+@property --spinner-size {
+  syntax: '*';
+  inherits: false;
+  initial-value: 5rem;
 }

@@ -1,11 +1,12 @@
+import dynamic from 'next/dynamic';
 import { Mona_Sans } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
-import TopBar from 'components/TopBar';
-
 import 'styles/globals.scss';
 import styles from './layout.module.scss';
+
+const ParticlesBackground = dynamic(() => import('components/ParticlesBackground', { ssr: false }));
 
 const MonaSanse = Mona_Sans({
   variable: '--font-mona-sans',
@@ -26,8 +27,8 @@ export default async function RootLayout ({
       <body className={MonaSanse.variable}>
         <NextIntlClientProvider messages={messages}>
           <main className={styles.Wrapper}>
-            <TopBar />
             {children}
+            <ParticlesBackground />
           </main>
         </NextIntlClientProvider>
       </body>

@@ -1,0 +1,30 @@
+.Spinner {
+    width: var(--spinner-size);
+    aspect-ratio: 1.15;
+    display: inline-grid;
+    background:
+      linear-gradient(to bottom left ,#0000 calc(50% - 1px),var(--color-accent) 0 calc(50% + 1px),#0000 0) right/50% 100%,
+      linear-gradient(to bottom right,#0000 calc(50% - 1px),var(--color-emphasis) 0 calc(50% + 1px),#0000 0) left /50% 100%,
+      linear-gradient(var(--color-emphasis) 0 0) bottom/100% 2px;
+    background-repeat: no-repeat;
+    transform-origin: 50% 66%;
+    animation: animate 4s infinite linear;
+    margin-bottom: var(--gap);
+
+  &::before,
+  &::after {
+    content: "";
+    grid-area: 1/1;
+    background: inherit;
+    transform-origin: inherit;
+    animation: inherit;
+  }
+
+  &::after {
+    animation-duration: 3s;
+  }
+
+  @keyframes animate{
+    100% {transform:rotate(1turn)}
+  }
+}

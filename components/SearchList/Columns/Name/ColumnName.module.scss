@@ -1,0 +1,20 @@
+@use 'styles/helpers';
+
+.ColumnName {
+  @include helpers.grid(row, null, null, var(--gap-sm));
+
+  font-size: 1.1em;
+}
+
+.Link {
+  @include helpers.overflow-ellipsis();
+
+  font-weight: bold;
+}
+
+.Tag {
+  @include helpers.overflow-ellipsis();
+
+  font-size: .75rem;
+  filter: brightness(80%);
+}

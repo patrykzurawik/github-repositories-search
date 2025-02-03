@@ -1,3 +1,8 @@
-.Form {
+@use 'styles/helpers';
 
+.SearchForm {
+  @include helpers.flex(row, null, stretch);
+
+  width: 100%;
+  height: 100%;
 }

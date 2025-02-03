@@ -22,6 +22,7 @@ export default function FormFieldText ({
   return (
     <input
       type='text'
+      placeholder={field.placeholder}
       aria-label={field.label}
       aria-invalid={isError}
       aria-describedby={isError

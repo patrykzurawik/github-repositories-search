@@ -1,20 +1,14 @@
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
-import Logo from 'public/logo.svg';
+import Logo from 'components/Logo';
+import SearchForm from 'components/SearchForm';
 
 import styles from './TopBar.module.scss';
 
-export default function TopBar () {
-  const t = useTranslations('SearchRepos');
-  
+export default async function TopBar () {
   return (
-    <header className={styles.Header}>
-      <Image
-        src={Logo}
-        alt={t('title')}
-        className={styles.Logo}
-      />
-      <h1 className={styles.Name}>{t('title')}</h1>
-    </header>
+    <div className={styles.TopBar}>
+      <Logo />
+      
+      <SearchForm className={styles.Form} />
+    </div>
   );
 }

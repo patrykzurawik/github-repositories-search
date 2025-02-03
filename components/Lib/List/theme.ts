@@ -1,4 +1,4 @@
-import { createTheme } from 'react-data-table-component';
+import { createTheme, TableStyles } from 'react-data-table-component';
 
 const getTheme = () => createTheme(
   'ghs',
@@ -23,12 +23,30 @@ const getTheme = () => createTheme(
   'dark'
 );
 
-const styles = {
+const styles: TableStyles = {
+  head: {
+    style: {
+      backgroundColor: 'var(--color-glass)',
+    },
+  },
   headCells: {
     style: {
+      padding: 'var(--gap-sm)',
       fontWeight: 'bold',
       fontSize: '1.2em',
       color: 'var(--color-accent)',
+    },
+  },
+  cells: {
+    style: {
+      padding: 'var(--gap-sm)',
+    },
+  },
+  pagination: {
+    style: {
+      border: 'none',
+      backgroundColor: 'var(--color-glass)',
+      justifyContent: 'center',
     },
   },
 };

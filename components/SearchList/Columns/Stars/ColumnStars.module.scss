@@ -1,0 +1,5 @@
+@use 'styles/helpers';
+
+.ColumnStars {
+  @include helpers.flex(row, center, center, var(--gap-xxs));
+}
