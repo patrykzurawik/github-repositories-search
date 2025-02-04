@@ -25,12 +25,14 @@ export type TListProps <TRow = TListRow> =
     | 'paginationDefaultPage'
     | 'paginationPerPage'
     | 'paginationRowsPerPageOptions'
+    | 'data'
+    | 'columns'
+    | 'onSort'
+    | 'defaultSortAsc'
+    | 'defaultSortFieldId'
 >
   & {
-  data: TableProps<TRow>['data'];
-  columns: TableProps<TRow>['columns'];
   isLoading?: boolean;
-  onSort?: TableProps<TRow>['onSort'];
   children?: React.ReactNode;
   className?: string;
 }
@@ -48,6 +50,9 @@ export default function List ({
   paginationRowsPerPageOptions = [ 10, 20, 50, 100 ],
 
   onSort,
+  defaultSortAsc,
+  defaultSortFieldId,
+
   children,
   className,
 }: TListProps) {
@@ -80,12 +85,18 @@ export default function List ({
           rangeSeparatorText: t('List.pagination.rangeSeparator'),
         }}
 
+        highlightOnHover
         striped
         theme='ghs'
         customStyles={customStyles}
 
         { ...onSort
-          ? { onSort, sortServer: true }
+          ? { 
+            onSort,
+            sortServer: true,
+            defaultSortAsc,
+            defaultSortFieldId,
+          }
           : null
         }
       />

@@ -27,6 +27,7 @@ export default function SearchList () {
 
   const columns: TListProps<Repo>['columns'] = [
     {
+      id: 'name',
       name: t('Results.list.name'),
       selector: (row) => row.name,
       sortable: true,
@@ -35,12 +36,14 @@ export default function SearchList () {
       grow: 4,
     },
     {
+      id: 'owner',
       name: t('Results.list.owner'),
       selector: (row) => row.owner?.login ?? '',
       format: (row) => <ColumnOwner row={row} />,
       grow: 1,
     },
     {
+      id: 'stars',
       name: t('Results.list.stars'),
       sortable: true,
       sortField: 'stars',
@@ -48,6 +51,7 @@ export default function SearchList () {
       format: (row) => <ColumnStars row={row} />,
     },
     {
+      id: 'created_at',
       name: t('Results.list.createdAt'),
       selector: (row) => row.created_at,
       format: (row) => <ColumnCreated row={row} />,
@@ -56,15 +60,20 @@ export default function SearchList () {
 
   return (
     <List
+      isLoading={isLoading || !data?.items}
       data={data?.items ?? []}
       columns={columns}
-      isLoading={isLoading || !data?.items}
-      onSort={onSort}
+
       onChangePage={onChangePage}
       onChangeRowsPerPage={onChangeRowsPerPage}
       paginationDefaultPage={params.page}
       paginationPerPage={params.per_page}
       paginationTotalRows={availableTotalRows}
+
+      onSort={onSort}
+      defaultSortFieldId={params.sort}
+      defaultSortAsc={params.order === 'asc'}
+
       className={styles.SearchList}
       data-ta='SearchList'
     >
