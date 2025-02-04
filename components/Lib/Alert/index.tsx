@@ -32,6 +32,12 @@ export default function Alert ({
         type === 'error' && styles.Error,
         className
       )}
+      data-ta={clsx(
+        'Alert',
+        type === 'warning' && 'AlertWarning',
+        type === 'error' && 'AlertError',
+        className
+      )}
     >
       <Icon className={styles.Icon} />
       {children}

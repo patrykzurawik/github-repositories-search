@@ -54,7 +54,10 @@ export default function List ({
   const t = useTranslations();
 
   return (
-    <div className={clsx(styles.List, className)}>
+    <div
+      className={clsx(styles.List, className)}
+      data-ta='List'
+    >
       {children}
 
       <DataTable

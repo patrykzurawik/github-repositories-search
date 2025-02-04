@@ -52,6 +52,7 @@ export default function SearchForm ({ className }: TSearchFormProps) {
       defaultValues={defaultValues}
       isLoading={isLoading}
       className={clsx(styles.SearchForm, className)}
+      data-ta='SearchForm'
     />
   );
 }

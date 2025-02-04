@@ -17,6 +17,7 @@ export default function ButtonPrimary ({
   return <button
     {...rest}
     className={clsx(styles.ButtonPrimary, className)}
+    data-ta='Button ButtonPrimary'
   >
     {children}
   </button>;

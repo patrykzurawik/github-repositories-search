@@ -55,6 +55,7 @@ export default function Form ({
     <form 
       onSubmit={handleSubmit(onSubmit)}
       className={clsx(styles.Wrapper, className)}
+      data-ta='SearchForm'
     >
       { fields.map((field, key) =>
         <FormField

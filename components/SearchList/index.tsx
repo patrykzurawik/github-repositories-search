@@ -66,6 +66,7 @@ export default function SearchList () {
       paginationPerPage={params.per_page}
       paginationTotalRows={availableTotalRows}
       className={styles.SearchList}
+      data-ta='SearchList'
     >
       { (realTotalRows > 0 && !isLoading)
         && <ItemsCount totalRows={realTotalRows} />
