@@ -12,6 +12,29 @@
   initial-value: #2b3137;
 }
 
+@property --color-background-warning {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #222216;
+}
+
+@property --color-background-warning-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #393928;
+}
+
+@property --color-background-destructive {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #1c1010;
+}
+@property --color-background-destructive-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #301b1b;
+}
+
 @property --color-text {
   syntax: '<color>';
   inherits: false;

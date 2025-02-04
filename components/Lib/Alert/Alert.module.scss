@@ -19,7 +19,8 @@
 }
 
 .Alert.Warning {
-    @include helpers.glass-effect(color.adjust(yellow, $alpha: -.95), color.adjust(yellow, $alpha: -.8));
+    border: 1px solid var(--color-background-warning-light);
+    background-color: var(--color-background-warning);
 
     & {
         width: auto;
@@ -32,7 +33,8 @@
 }
 
 .Alert.Error {
-    @include helpers.glass-effect(color.adjust(red, $alpha: -.95), color.adjust(red, $alpha: -.8));
+    border: 1px solid var(--color-background-destructive-light);
+    background-color: var(--color-background-destructive);
 
     & {
         width: auto;
