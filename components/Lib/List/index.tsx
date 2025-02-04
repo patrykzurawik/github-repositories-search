@@ -1,17 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import DataTable, { TableProps } from 'react-data-table-component';
+import { useTranslations } from 'next-intl';
+
+import ItemsCount from 'components/Lib/List/ItemsCount';
+import NoData from 'components/Lib/List/NoData';
+import Spinner from 'components/Lib/Spinner';
 
 import { getTheme, styles } from './theme';
 
 getTheme();
 
-export type TListRow = Record<string, unknown>;
+// TODO: fix type
+// eslint-disable-next-line
+export type TListRow = Record<string, unknown> & any;
 
 export type TListProps <TRow = TListRow> =
   Pick<TableProps<TRow>,
     'onChangePage'
+    | 'onChangeRowsPerPage'
     | 'paginationTotalRows'
     | 'paginationDefaultPage'
     | 'paginationPerPage'
@@ -19,7 +26,6 @@ export type TListProps <TRow = TListRow> =
 >
   & {
   data: TableProps<TRow>['data'];
-  total: TableProps<TRow>['paginationTotalRows'];
   columns: TableProps<TRow>['columns'];
   isLoading?: boolean;
   onSort?: TableProps<TRow>['onSort'];
@@ -32,43 +38,52 @@ export default function List ({
   isLoading,
 
   onChangePage,
+  onChangeRowsPerPage,
   paginationTotalRows,
   paginationDefaultPage,
-  paginationPerPage = 50,
+  paginationPerPage = 20,
   paginationRowsPerPageOptions = [ 10, 20, 50, 100 ],
 
   onSort,
   className,
 }: TListProps) {
-  const [ items, setItems ] = useState<TListRow[]>(() => data);
-
-  useEffect(() => {
-    setItems(data);
-  }, [data]);
-
+  const t = useTranslations();
+  const totalRows = paginationTotalRows ?? 0;
+  const isPending = isLoading || !Number.isSafeInteger(paginationTotalRows);
+  
   return (
-    <DataTable
-      columns={columns}
-      data={items}
-      progressPending={isLoading}
+    <div className={className}>
+      { totalRows > 0 && <ItemsCount totalRows={totalRows} /> }
 
-      pagination
-      paginationServer
-      onChangePage={onChangePage}
-      paginationTotalRows={paginationTotalRows ?? 0}
-      paginationDefaultPage={Number(paginationDefaultPage)}
-      paginationPerPage={Number(paginationPerPage)}
-      paginationRowsPerPageOptions={paginationRowsPerPageOptions}
+      <DataTable
+        columns={columns}
+        data={data}
+        progressPending={isPending}
+        progressComponent={<Spinner />}
+        noDataComponent={totalRows === 0 ?  <NoData /> : null}
 
-      striped
-      theme='ghs'
-      customStyles={styles}
+        onChangePage={onChangePage}
+        onChangeRowsPerPage={onChangeRowsPerPage}
+        pagination
+        paginationServer
+        paginationTotalRows={totalRows}
+        paginationDefaultPage={Number(paginationDefaultPage)}
+        paginationPerPage={Number(paginationPerPage)}
+        paginationRowsPerPageOptions={paginationRowsPerPageOptions}
+        paginationComponentOptions={{
+          rowsPerPageText: t('List.pagination.rowsPerPage'),
+          rangeSeparatorText: t('List.pagination.rangeSeparator'),
+        }}
 
-      { ...onSort
-        ? { onSort, sortServer: true }
-        : null
-      }
-      className={className}
-    />
+        striped
+        theme='ghs'
+        customStyles={styles}
+
+        { ...onSort
+          ? { onSort, sortServer: true }
+          : null
+        }
+      />
+    </div>
   );
 }

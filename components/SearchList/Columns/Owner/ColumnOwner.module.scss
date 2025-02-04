@@ -1,0 +1,20 @@
+@use 'styles/helpers';
+
+.ColumnOwner {
+  @include helpers.flex(row, start, center, var(--gap-xs));
+}
+
+.Image {
+  width: 1.75em !important;
+  height: auto !important;
+  position: static !important;
+  border-radius: 50%;
+}
+
+.Link {
+  @include helpers.overflow-ellipsis();
+
+  & {
+    color: inherit;
+  }
+}

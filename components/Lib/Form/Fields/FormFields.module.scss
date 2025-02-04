@@ -1,7 +1,7 @@
 .FormField {
   display: grid;
-  gap: var(--gap-sm);
-  width: min(50ch, 100%);
+  gap: var(--gap-xxs);
+  width: min(60ch, 100%);
 
   input {
     width: 100%;

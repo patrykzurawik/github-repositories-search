@@ -1,0 +1,23 @@
+@use 'styles/helpers';
+
+.ButtonSecondary {
+  @include helpers.flex(column, center);
+
+  & {
+    padding: var(--gap-sm);
+    background-color: var(--color-background-light);
+    border: 1px solid var(--color-background-light);
+    border-radius: var(--border-radius);
+    color: inherit;
+    cursor: pointer;
+    text-transform: uppercase;
+
+    &:hover {
+      filter: brightness(110%);
+    }
+
+    &:focus-visible {
+      background-color: var(--color-emphasis);
+    }
+  }
+}

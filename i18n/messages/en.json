@@ -1,6 +1,7 @@
 {
   "CTA": {
-    "search": "Search"
+    "search": "Search",
+    "tryAgain": "Try again"
   },
   "Validators": {
     "required":"Required",
@@ -9,7 +10,7 @@
   },
   "SearchRepos": {
     "title": "GitHub Search",
-    "queryLabel": "Type repository name...",
+    "queryLabel": "Type a repository name...",
     "meta": {
       "title": "GitHub Search",
       "description": "Discover & Explore GitHub repos. Your gateway to the vast world of open-source code."
@@ -26,5 +27,19 @@
       "title": "GitHub Search",
       "description": "Discover & Explore GitHub repos. Your gateway to the vast world of open-source code."
     }
+  },
+  "Spinner": {
+    "label": "Loading..."
+  },
+  "ErrorBoundary": {
+    "title": "Something went wrong :("
+  },
+  "List": {
+    "noDataMessage": "Unfortunately, no data found.",
+    "pagination": {
+      "rowsPerPage": "Show",
+      "rangeSeparator": "of"
+    },
+    "itemsCountMessage": "Found: <value></value> row(s)"
   }
 }

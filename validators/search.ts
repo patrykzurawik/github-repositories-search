@@ -36,5 +36,5 @@ export const validateUnsafeSearchQueryParams =
       return { isError: true };
     }
 
-    return { isSuccess: true, data };
+    return { isSuccess: true, data: data as ReposSearchQueryParams };
   };

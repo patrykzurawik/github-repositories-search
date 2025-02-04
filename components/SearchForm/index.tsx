@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { clsx } from 'clsx';
 import { ROUTE_SEARCH } from 'constants/routes';
 import { FormField, FormFieldTypeEnum } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
@@ -12,13 +13,23 @@ import Form from 'components/Lib/Form';
 
 import styles from './SearchForm.module.scss';
 
-export default function SearchForm () {
+type TSearchFormProps = {
+  className?: string;
+}
+
+export default function SearchForm ({ className }: TSearchFormProps) {
   const router = useRouter();
   const unsafeSearchParams = useSearchParams();
   const t = useTranslations();
 
   const fields: FormField[] = [
-    { type: FormFieldTypeEnum.TEXT, name: 'q', label: t('SearchRepos.queryLabel') },
+    {
+      type: FormFieldTypeEnum.TEXT,
+      name: 'q',
+      label: t('SearchRepos.queryLabel'),
+      placeholder: t('SearchRepos.queryLabel'),
+      autofocus: true,
+    },
   ];
   
   const schema = getSearchSchema(t);
@@ -27,12 +38,11 @@ export default function SearchForm () {
     router.push(ROUTE_SEARCH(formState.data));
   };
 
-  let defaultValues: Partial<ReposSearchQueryParams> = {};
-
   const { isSuccess, data: params } = validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t);
-  if (isSuccess && params) {
-    defaultValues = params;
-  }
+
+  let defaultValues: Partial<ReposSearchQueryParams> = {};
+  if (isSuccess && params)
+    defaultValues = { q: params.q };
 
   return (
     <Form
@@ -40,7 +50,7 @@ export default function SearchForm () {
       schema={schema}
       onSuccess={onSuccess}
       defaultValues={defaultValues}
-      className={styles.Form}
+      className={clsx(styles.SearchForm, className)}
     />
   );
 }

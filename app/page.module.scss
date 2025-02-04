@@ -1,0 +1,15 @@
+@use "styles/helpers";
+
+.Wrapper {
+    @include helpers.grid(row, center, center, var(--gap-lg));
+    @include helpers.glass-effect();
+
+    & {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        width: 95%;
+        padding-bottom: var(--gap-lg) !important;
+    }
+}

@@ -1,17 +1,26 @@
 @use 'styles/helpers';
 
-.Header {
+.TopBar {
   @include helpers.glass-effect;
-  @include helpers.flex;
+  @include helpers.grid(row, center, null, var(--gap-sm));
 
-  gap: var(--gap);
+  & {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+
+    @include helpers.media-query-min(md) {
+      @include helpers.grid(column, start, center, var(--gap-lg));
+
+      & {
+        grid-template-columns: max-content 1fr;
+      }
+    }
+  }
 }
 
-.Logo {
-  width: auto;
-  height: calc(var(--font-size-xxl) + 5rem);
-}
-
-.Name {
-  font-size: var(--font-size-xxl);
+.Form {
+  @include helpers.media-query-min(md) {
+    justify-content: end !important;
+  }
 }

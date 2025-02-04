@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import SearchForm from 'components/SearchForm';
 import SearchList from 'components/SearchList';
 
 export async function generateMetadata (): Promise<Metadata> {
@@ -13,9 +12,6 @@ export async function generateMetadata (): Promise<Metadata> {
   };
 }
 
-export default function SearchPage () {
-  return <>
-    <SearchForm />
-    <SearchList />
-  </>;
+export default async function SearchPage () {
+  return <SearchList />;
 }

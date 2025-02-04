@@ -3,7 +3,6 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
 }
 
 body {
@@ -11,6 +10,7 @@ body {
   color: var(--color-text);
   background: var(--color-background);
   font-family: Mona Sans, sans-serif;
+  overflow: visible;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -19,12 +19,29 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  outline: none;
+
+  &:focus-visible {
+    border: 1px solid var(--color-accent) !important;
+    color: var(--color-text) !important;
+  }
 }
 
 a {
-  color: inherit;
+  color: var(--color-emphasis);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .main {
   max-width: 1200px;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+svg {
+  fill: currentColor;
 }

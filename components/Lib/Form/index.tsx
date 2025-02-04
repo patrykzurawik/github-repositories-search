@@ -1,6 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import { FaSearch } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { clsx } from 'clsx';
@@ -29,6 +30,7 @@ export default function Form ({
   className,
 }: FormProps) {
   const t = useTranslations();
+
   const {
     register,
     formState,
@@ -63,9 +65,10 @@ export default function Form ({
 
       <ButtonPrimary
         type='submit'
+        aria-label={t('CTA.search')}
         className={styles.SubmitButton}
       >
-        {t('CTA.search')}
+        <FaSearch />
       </ButtonPrimary>
     </form>
   );

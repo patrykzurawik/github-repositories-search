@@ -1,8 +1,9 @@
+import { Suspense } from 'react';
 import { Mona_Sans } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
-import TopBar from 'components/TopBar';
+import ParticlesBackground from 'components/ParticlesBackground';
 
 import 'styles/globals.scss';
 import styles from './layout.module.scss';
@@ -26,8 +27,10 @@ export default async function RootLayout ({
       <body className={MonaSanse.variable}>
         <NextIntlClientProvider messages={messages}>
           <main className={styles.Wrapper}>
-            <TopBar />
-            {children}
+            <Suspense>
+              {children}
+            </Suspense>
+            <ParticlesBackground />
           </main>
         </NextIntlClientProvider>
       </body>
