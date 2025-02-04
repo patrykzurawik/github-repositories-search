@@ -30,6 +30,12 @@
   initial-value: #2dba4e;
 }
 
+@property --color-accent-transparent {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #2dba4e10;
+}
+
 @property --color-emphasis {
   syntax: '<color>';
   inherits: false;

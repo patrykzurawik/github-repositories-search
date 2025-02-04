@@ -4,7 +4,8 @@
   @include helpers.flex(column, center);
 
   & {
-    padding: var(--gap-sm);
+    width: max-content;
+    padding: var(--gap-xs);
     background-color: var(--color-accent);
     border: 1px solid var(--color-accent);
     border-radius: var(--border-radius);
@@ -23,6 +24,12 @@
     &:disabled {
       filter: brightness(80%);
       cursor: wait;
+    }
+  }
+
+  @include helpers.media-query-min(lg) {
+    & {
+      padding: var(--gap-sm);
     }
   }
 }

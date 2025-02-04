@@ -22,7 +22,7 @@ export const useReposSearch = (params: Partial<ReposSearchQueryParams> | null) =
 
   return {
     isLoading,
-    isError: error,
+    error,
     data,
   };
 };

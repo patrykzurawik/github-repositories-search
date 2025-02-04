@@ -19,7 +19,7 @@ export default function SearchList () {
   const unsafeSearchParams = useSearchParams();
   
   const {
-    isLoading, data,
+    isLoading, error, data,
     onSort, onChangePage, onChangeRowsPerPage,
     params,
     realTotalRows, availableTotalRows,
@@ -57,6 +57,10 @@ export default function SearchList () {
       format: (row) => <ColumnCreated row={row} />,
     },
   ];
+
+  if (error) {
+    throw error;
+  }
 
   return (
     <List

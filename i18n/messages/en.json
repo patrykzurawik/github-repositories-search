@@ -1,7 +1,8 @@
 {
   "CTA": {
     "search": "Search",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "reset": "Reset"
   },
   "Validators": {
     "required":"Required",

@@ -20,7 +20,7 @@ type TSearchFormProps = {
 export default function SearchForm ({ className }: TSearchFormProps) {
   const unsafeSearchParams = useSearchParams();
   const t = useTranslations();
-  const { isLoading, doSearch } = useSearch(unsafeSearchParams);
+  const { isLoading, doSearch, error } = useSearch(unsafeSearchParams);
 
   const fields: FormField[] = [
     {
@@ -35,7 +35,7 @@ export default function SearchForm ({ className }: TSearchFormProps) {
   const schema = getSearchSchema(t);
   
   const onSuccess = (formState: FormStateSuccess<ReposSearchQueryParams>) => {
-    doSearch(formState.data);
+    doSearch(formState.data, Boolean(error));
   };
 
   const { isSuccess, data: params } = validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t);

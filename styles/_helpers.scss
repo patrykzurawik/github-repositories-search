@@ -1,7 +1,7 @@
 @use "sass:list";
 @use "sass:map";
 
-@mixin glass-effect ($background-color: var(--color-glass), $border-color: var(--color-glass-border-color)) {
+@mixin glass-effect ($background-color: var(--color-glass), $border-color: var(--color-glass-border)) {
   & {
     width: 100%;
     background-color: $background-color;
