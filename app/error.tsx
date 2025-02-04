@@ -1,36 +1,13 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { MdError } from 'react-icons/md';
-import { useTranslations } from 'next-intl';
-
-import ButtonSecondary from 'components/Lib/Button/Secondary';
-
-import styles from './error.module.scss';
+import ErrorMessage from 'components/Lib/ErrorMessage';
 
 export default function Error ({
   error,
+  reset,
 }: {
-  error: Error & { digest?: string }
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
-  const t = useTranslations();
-
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-
-  return <div
-    role='alert'
-    aria-live='assertive'
-    className={styles.ErrorBoundary}
-  >
-    <span className={styles.Title}>
-      <MdError />
-      {t('ErrorBoundary.title')}
-    </span>
-
-    <ButtonSecondary onClick={() => document.location.reload()}>
-      {t('CTA.tryAgain')}
-    </ButtonSecondary>
-  </div>;
+  return <ErrorMessage error={error} reset={reset} />;
 }

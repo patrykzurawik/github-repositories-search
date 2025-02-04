@@ -1,34 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { ROUTE_INDEX, ROUTE_SEARCH } from 'constants/routes';
+import useSearch from 'hooks/useSearch';
 import { Repo } from 'lib/octokit/types/repos';
-import { useReposSearch } from 'lib/queries/repos';
-import { ReposSearchQueryParams } from 'types/repos';
-import { validateUnsafeSearchQueryParams } from 'validators/search';
 
 import List, { TListProps } from 'components/Lib/List';
 import ColumnCreated from 'components/SearchList/Columns/Created';
 import ColumnName from 'components/SearchList/Columns/Name';
 import ColumnOwner from 'components/SearchList/Columns/Owner';
 import ColumnStars from 'components/SearchList/Columns/Stars';
+import ItemsCount from 'components/SearchList/ItemsCount';
 
 import styles from './SearchList.module.scss';
 
 export default function SearchList () {
   const t = useTranslations();
-  const router = useRouter();
   const unsafeSearchParams = useSearchParams();
-
-  const validationResult =
-    validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()));
-
-  const [ params, setParams ] = useState<Partial<ReposSearchQueryParams>>(() => validationResult.data ?? {});
+  
+  const {
+    isLoading, error, data,
+    onSort, onChangePage, onChangeRowsPerPage,
+    params,
+    realTotalRows, availableTotalRows,
+  } = useSearch(unsafeSearchParams);
 
   const columns: TListProps<Repo>['columns'] = [
     {
+      id: 'name',
       name: t('Results.list.name'),
       selector: (row) => row.name,
       sortable: true,
@@ -37,15 +36,14 @@ export default function SearchList () {
       grow: 4,
     },
     {
-      // TODO: fix sorting if possible
+      id: 'owner',
       name: t('Results.list.owner'),
-      sortable: true,
-      sortField: 'owner',
       selector: (row) => row.owner?.login ?? '',
       format: (row) => <ColumnOwner row={row} />,
       grow: 1,
     },
     {
+      id: 'stars',
       name: t('Results.list.stars'),
       sortable: true,
       sortField: 'stars',
@@ -53,58 +51,39 @@ export default function SearchList () {
       format: (row) => <ColumnStars row={row} />,
     },
     {
-      // TODO: fix sorting if possible
+      id: 'created_at',
       name: t('Results.list.createdAt'),
-      sortable: true,
-      sortField: 'created',
       selector: (row) => row.created_at,
       format: (row) => <ColumnCreated row={row} />,
     },
   ];
 
-  const onSort: TListProps<Partial<Repo>>['onSort'] = ({ sortField: sort  }, order) =>
-    router.push(ROUTE_SEARCH({ ...params, sort, order, page: 1 } as ReposSearchQueryParams));
-
-  const onChangePage: TListProps<Partial<Repo>>['onChangePage'] = (page) =>
-    router.push(ROUTE_SEARCH({ ...params, page } as ReposSearchQueryParams));
-
-  const onChangeRowsPerPage: TListProps<Partial<Repo>>['onChangeRowsPerPage'] = (per_page) =>
-    router.push(ROUTE_SEARCH({ ...params, per_page, page: 1 } as ReposSearchQueryParams));
-
-  const { data, isLoading, isError } = useReposSearch(params
-    ? params as ReposSearchQueryParams
-    : null
-  );
-
-  useEffect(() => {
-    if (!validationResult.isSuccess)
-      return router.push(ROUTE_INDEX());
-
-    if (Object.keys(validationResult.data).length !== Array.from(unsafeSearchParams.keys()).length)
-      return router.push(ROUTE_SEARCH(validationResult.data));
-
-    setParams(validationResult.data);
-  },
-  [ validationResult, unsafeSearchParams ]);
-
-  useEffect(() => {
-    if (isError) {
-      throw new Error(isError);
-    };
-  }, [isError]);
+  if (error) {
+    throw error;
+  }
 
   return (
     <List
+      isLoading={isLoading || !data?.items}
       data={data?.items ?? []}
       columns={columns}
-      isLoading={isLoading || !data?.items}
-      onSort={onSort}
+
       onChangePage={onChangePage}
       onChangeRowsPerPage={onChangeRowsPerPage}
       paginationDefaultPage={params.page}
       paginationPerPage={params.per_page}
-      paginationTotalRows={data?.total_count}
+      paginationTotalRows={availableTotalRows}
+
+      onSort={onSort}
+      defaultSortFieldId={params.sort}
+      defaultSortAsc={params.order === 'asc'}
+
       className={styles.SearchList}
-    />
+      data-ta='SearchList'
+    >
+      { (realTotalRows > 0 && !isLoading)
+        && <ItemsCount totalRows={realTotalRows} />
+      }
+    </List>
   );
 }

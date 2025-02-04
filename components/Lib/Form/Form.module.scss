@@ -5,8 +5,13 @@
 }
 
 .SubmitButton {
-  border-top-left-radius: unset !important;
-  border-bottom-left-radius: unset !important;
-  font-size: var(--font-size-lg);
-  height: 3rem;
+  height: var(--input-height);
+  font-size: 100%;
+  padding: .1em .75em;
+
+  @include helpers.media-query-min(md) {
+    & {
+      height: var(--input-height-md);
+    }
+  }
 }

@@ -9,3 +9,5 @@ export const DEFAULT_SEARCH_PARAMS: Partial<ReposSearchQueryParams> = {
 
 export const DEFAULT_SEARCH_PARAMS_ORDER =
   ['q', 'page', 'per_page', 'sort', 'order'] as (keyof ReposSearchQueryParams)[];
+
+export const SEARCH_RESULTS_LIMIT = 1000;

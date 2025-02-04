@@ -10,10 +10,11 @@
     z-index: 1;
 
     @include helpers.media-query-min(md) {
-      @include helpers.grid(column, start, center, var(--gap-lg));
+      @include helpers.grid(column, center, center, var(--gap-lg));
 
       & {
         grid-template-columns: max-content 1fr;
+        align-items: center;
       }
     }
   }

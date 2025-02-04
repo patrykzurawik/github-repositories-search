@@ -30,7 +30,10 @@ export default function FormFieldText ({
         : field.label
       }
       {...register(field.name)}
+      disabled={field.disabled}
+      autoFocus={field.autofocus}
       className={styles.Input}
+      data-ta='FormFieldText'
     />
   );
 }

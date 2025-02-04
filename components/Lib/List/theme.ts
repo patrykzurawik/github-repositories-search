@@ -16,14 +16,24 @@ const getTheme = () => createTheme(
     divider: {
       default: 'var(--color-background)',
     },
-    sortFocus: {
-      default: 'blue',
+    highlightOnHover: {
+      default: 'var(--color-accent-transparent)',
     },
   },
   'dark'
 );
 
 const styles: TableStyles = {
+  rows: {
+    style: {
+      border: '1px solid var(--color-background-light)',
+    },
+  },
+  headRow: {
+    style: {
+      border: '1px solid var(--color-background-light)',
+    },
+  },
   head: {
     style: {
       backgroundColor: 'var(--color-glass)',
@@ -44,7 +54,7 @@ const styles: TableStyles = {
   },
   pagination: {
     style: {
-      border: 'none',
+      border: '1px solid var(--color-background-light)',
       backgroundColor: 'var(--color-glass)',
       justifyContent: 'center',
     },

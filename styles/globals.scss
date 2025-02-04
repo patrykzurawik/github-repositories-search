@@ -45,3 +45,7 @@ a {
 svg {
   fill: currentColor;
 }
+
+input:disabled {
+  color: var(--color-text-light);
+}

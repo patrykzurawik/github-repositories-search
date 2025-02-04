@@ -1,0 +1,26 @@
+@use "styles/helpers";
+
+.ErrorMessage {
+  & {
+    width: 100% !important;
+    padding: var(--gap-sm);
+    font-size: var(--font-size-md);
+    word-break: break-all;
+  }
+
+  @include helpers.media-query-min(sm) {
+    & {
+      padding: var(--gap) !important;
+    }
+  }
+}
+
+.Buttons {
+  @include helpers.flex(row, start, center, var(--gap-xs));
+
+  @include helpers.media-query-min(md) {
+    & {
+      margin-left: auto;
+    }
+  }
+}

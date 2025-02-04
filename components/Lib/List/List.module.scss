@@ -1,0 +1,9 @@
+@use "styles/helpers";
+
+.List {
+  @include helpers.flex(column, stretch, start, var(--gap-sm));
+
+  & {
+    padding: var(--gap-sm);
+  }
+}

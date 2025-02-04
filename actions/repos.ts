@@ -8,7 +8,7 @@ import { getSearchSchema } from 'validators/search';
 
 export const fetchCachedData = unstable_cache(
   async (params: ReposSearchParams): Promise<ReposSearchResponse['data']> => {
-    console.log('[getCachedRepos] ', JSON.stringify(params));
+    console.log('[octokit.rest.search.repos]: ', JSON.stringify(params));
 
     const t = await getTranslations();
     const { success, data } = getSearchSchema(t).safeParse(params);
@@ -24,5 +24,5 @@ export const fetchCachedData = unstable_cache(
     return (await octokit.rest.search.repos(data as ReposSearchParams)).data;
   },
   [],
-  { revalidate: 3600 }
+  { revalidate: 600 }
 );

@@ -18,10 +18,22 @@
   initial-value: #fafbfc;
 }
 
+@property --color-text-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #acacac;
+}
+
 @property --color-accent {
   syntax: '<color>';
   inherits: false;
   initial-value: #2dba4e;
+}
+
+@property --color-accent-transparent {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #2dba4e10;
 }
 
 @property --color-emphasis {
@@ -34,6 +46,24 @@
   syntax: '<color>';
   inherits: false;
   initial-value: #ff2c1f;
+}
+
+@property --color-destructive-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ff4d41;
+}
+
+@property --color-warning {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ff9e1f;
+}
+
+@property --color-warning-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #ffa642;
 }
 
 @property --color-glass {
@@ -80,7 +110,13 @@
 @property --input-height {
   syntax: '*';
   inherits: false;
-  initial-value: 2.25em;
+  initial-value: 2.25rem;
+}
+
+@property --input-height-md {
+  syntax: '*';
+  inherits: false;
+  initial-value: 2.25rem;
 }
 
 @property --border-radius {
@@ -93,6 +129,12 @@
   syntax: '*';
   inherits: false;
   initial-value: .8rem;
+}
+
+@property --font-size-md {
+  syntax: '*';
+  inherits: false;
+  initial-value: .9rem;
 }
 
 @property --font-size-lg {
@@ -116,7 +158,7 @@
 @property --font-size-xxxl {
   syntax: '*';
   inherits: false;
-  initial-value: 4rem;
+  initial-value: 3rem;
 }
 
 @property --spinner-size {

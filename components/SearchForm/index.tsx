@@ -1,9 +1,9 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { clsx } from 'clsx';
-import { ROUTE_SEARCH } from 'constants/routes';
+import useSearch from 'hooks/useSearch';
 import { FormField, FormFieldTypeEnum } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
 import { ReposSearchQueryParams } from 'types/repos';
@@ -18,9 +18,9 @@ type TSearchFormProps = {
 }
 
 export default function SearchForm ({ className }: TSearchFormProps) {
-  const router = useRouter();
   const unsafeSearchParams = useSearchParams();
   const t = useTranslations();
+  const { isLoading, doSearch, error } = useSearch(unsafeSearchParams);
 
   const fields: FormField[] = [
     {
@@ -35,7 +35,7 @@ export default function SearchForm ({ className }: TSearchFormProps) {
   const schema = getSearchSchema(t);
   
   const onSuccess = (formState: FormStateSuccess<ReposSearchQueryParams>) => {
-    router.push(ROUTE_SEARCH(formState.data));
+    doSearch(formState.data, Boolean(error));
   };
 
   const { isSuccess, data: params } = validateUnsafeSearchQueryParams(Object.fromEntries(unsafeSearchParams.entries()), t);
@@ -50,7 +50,9 @@ export default function SearchForm ({ className }: TSearchFormProps) {
       schema={schema}
       onSuccess={onSuccess}
       defaultValues={defaultValues}
+      isLoading={isLoading}
       className={clsx(styles.SearchForm, className)}
+      data-ta='SearchForm'
     />
   );
 }

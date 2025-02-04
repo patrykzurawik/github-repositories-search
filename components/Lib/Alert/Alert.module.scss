@@ -1,0 +1,45 @@
+@use "styles/helpers";
+@use "sass:color";
+
+.Alert {
+    @include helpers.flex(column, center, center, var(--gap-xs));
+
+    & {
+        width: max-content;
+        padding: var(--gap-xs) !important;
+    }
+
+    @include helpers.media-query-min(md) {
+        @include helpers.flex(row, start, center, var(--gap-sm))
+    }
+}
+
+.Icon {
+    font-size: 1.5em;
+}
+
+.Alert.Warning {
+    @include helpers.glass-effect(color.adjust(yellow, $alpha: -.95), color.adjust(yellow, $alpha: -.8));
+
+    & {
+        width: max-content;
+        color: var(--color-warning-light);
+    }
+
+    & .Icon {
+        color: var(--color-warning);
+    }
+}
+
+.Alert.Error {
+    @include helpers.glass-effect(color.adjust(red, $alpha: -.95), color.adjust(red, $alpha: -.8));
+
+    & {
+        width: max-content;
+        color: var(--color-destructive-light);
+    }
+
+    & .Icon {
+        color: var(--color-destructive);
+    }
+}
