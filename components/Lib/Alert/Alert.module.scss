@@ -5,7 +5,7 @@
     @include helpers.flex(column, center, center, var(--gap-xs));
 
     & {
-        width: max-content;
+        width: auto;
         padding: var(--gap-xs) !important;
     }
 
@@ -22,7 +22,7 @@
     @include helpers.glass-effect(color.adjust(yellow, $alpha: -.95), color.adjust(yellow, $alpha: -.8));
 
     & {
-        width: max-content;
+        width: auto;
         color: var(--color-warning-light);
     }
 
@@ -35,7 +35,7 @@
     @include helpers.glass-effect(color.adjust(red, $alpha: -.95), color.adjust(red, $alpha: -.8));
 
     & {
-        width: max-content;
+        width: auto;
         color: var(--color-destructive-light);
     }
 
