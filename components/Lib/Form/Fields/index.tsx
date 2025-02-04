@@ -3,6 +3,7 @@
 import { FieldError, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { FormField as FormFieldType, FormFieldTypeEnum } from 'types/form/fields';
 
+import ErrorMessage from 'components/Lib/Form/Fields/ErrorMessage';
 import FormFieldText from 'components/Lib/Form/Fields/FormFieldText';
 
 import styles from './FormFields.module.scss';
@@ -27,13 +28,7 @@ export default function FormField ({
   return (
     <div className={styles.FormField}>
       {fieldToRender({ field, register, error })}
-      {/*TODO: properly handle error message*/}
-      {error && <p
-        role='alert'
-        style={{ color: 'red' }}
-      >
-        {JSON.stringify(error.message)}
-      </p>}
+      {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </div>
   );
 };

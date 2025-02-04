@@ -63,10 +63,13 @@ export default function SearchList () {
   ];
 
   const onSort: TListProps<Partial<Repo>>['onSort'] = ({ sortField: sort  }, order) =>
-    router.push(ROUTE_SEARCH({ ...params, sort: sort, order, page: 1 } as ReposSearchQueryParams));
+    router.push(ROUTE_SEARCH({ ...params, sort, order, page: 1 } as ReposSearchQueryParams));
 
   const onChangePage: TListProps<Partial<Repo>>['onChangePage'] = (page) =>
     router.push(ROUTE_SEARCH({ ...params, page } as ReposSearchQueryParams));
+
+  const onChangeRowsPerPage: TListProps<Partial<Repo>>['onChangeRowsPerPage'] = (per_page) =>
+    router.push(ROUTE_SEARCH({ ...params, per_page, page: 1 } as ReposSearchQueryParams));
 
   const { data, isLoading, isError } = useReposSearch(params
     ? params as ReposSearchQueryParams
@@ -76,10 +79,13 @@ export default function SearchList () {
   useEffect(() => {
     if (!validationResult.isSuccess)
       return router.push(ROUTE_INDEX());
-    
+
+    if (Object.keys(validationResult.data).length !== unsafeSearchParams.keys().toArray().length)
+      return router.push(ROUTE_SEARCH(validationResult.data));
+
     setParams(validationResult.data);
   },
-  [ validationResult ]);
+  [ validationResult, unsafeSearchParams ]);
 
   useEffect(() => {
     if (isError) {
@@ -94,7 +100,9 @@ export default function SearchList () {
       isLoading={isLoading || !data?.items}
       onSort={onSort}
       onChangePage={onChangePage}
+      onChangeRowsPerPage={onChangeRowsPerPage}
       paginationDefaultPage={params.page}
+      paginationPerPage={params.per_page}
       paginationTotalRows={data?.total_count}
       className={styles.SearchList}
     />

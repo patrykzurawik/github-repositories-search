@@ -20,5 +20,7 @@
 }
 
 .Form {
-  justify-content: end !important;
+  @include helpers.media-query-min(md) {
+    justify-content: end !important;
+  }
 }

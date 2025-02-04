@@ -1,6 +1,7 @@
 @use "styles/helpers";
 
 .Input {
+  height: 3rem;
   border-radius: var(--border-radius);
   border-top-right-radius: unset;
   border-bottom-right-radius: unset;
@@ -10,8 +11,8 @@
   font-size: var(--font-size-lg);
   color: var(--color-text);
 
-  & {
-    @include helpers.media-query-min(lg) {
+  @include helpers.media-query-min(lg) {
+    & {
       font-size: var(--font-size-xl);
     }
   }

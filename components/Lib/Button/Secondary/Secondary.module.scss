@@ -15,5 +15,9 @@
     &:hover {
       filter: brightness(110%);
     }
+
+    &:focus-visible {
+      background-color: var(--color-emphasis);
+    }
   }
 }

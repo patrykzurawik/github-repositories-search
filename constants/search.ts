@@ -2,7 +2,7 @@ import { ReposSearchQueryParams } from 'types/repos';
 
 export const DEFAULT_SEARCH_PARAMS: Partial<ReposSearchQueryParams> = {
   page: 1,
-  per_page: 50,
+  per_page: 20,
   sort: 'stars',
   order: 'desc',
 };

@@ -20,7 +20,7 @@
   @include helpers.overflow-ellipsis();
 
   & {
-    font-size: .75rem;
+    font-size: var(--font-size-sm);
     filter: brightness(80%);
   }
 }

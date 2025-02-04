@@ -20,7 +20,9 @@
     @include helpers.media-query-min(sm) {
       @include helpers.flex(row, center, center, var(--gap-xs));
 
-      font-size: var(--font-size-xl);
+      & {
+        font-size: var(--font-size-xl);
+      }
     }
   }
 }

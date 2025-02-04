@@ -5,7 +5,8 @@ import { MdError } from 'react-icons/md';
 import { useTranslations } from 'next-intl';
 
 import ButtonSecondary from 'components/Lib/Button/Secondary';
-import styles from 'components/Lib/ErrorBoundary/ErrorBounday.module.scss';
+
+import styles from '../error.module.scss';
 
 export default function Error ({
   error,

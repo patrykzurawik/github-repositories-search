@@ -1,7 +1,7 @@
 @use 'styles/helpers';
 
 .SearchForm {
-  @include helpers.flex(row, null, stretch);
+  @include helpers.flex(row, null, start);
 
   & {
     width: 100%;

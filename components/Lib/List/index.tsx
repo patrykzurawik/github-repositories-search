@@ -18,6 +18,7 @@ export type TListRow = Record<string, unknown> & any;
 export type TListProps <TRow = TListRow> =
   Pick<TableProps<TRow>,
     'onChangePage'
+    | 'onChangeRowsPerPage'
     | 'paginationTotalRows'
     | 'paginationDefaultPage'
     | 'paginationPerPage'
@@ -37,6 +38,7 @@ export default function List ({
   isLoading,
 
   onChangePage,
+  onChangeRowsPerPage,
   paginationTotalRows,
   paginationDefaultPage,
   paginationPerPage = 20,
@@ -61,6 +63,7 @@ export default function List ({
         noDataComponent={totalRows === 0 ?  <NoData /> : null}
 
         onChangePage={onChangePage}
+        onChangeRowsPerPage={onChangeRowsPerPage}
         pagination
         paginationServer
         paginationTotalRows={totalRows}

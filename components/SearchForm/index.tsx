@@ -28,6 +28,7 @@ export default function SearchForm ({ className }: TSearchFormProps) {
       name: 'q',
       label: t('SearchRepos.queryLabel'),
       placeholder: t('SearchRepos.queryLabel'),
+      autofocus: true,
     },
   ];
   
@@ -41,7 +42,7 @@ export default function SearchForm ({ className }: TSearchFormProps) {
 
   let defaultValues: Partial<ReposSearchQueryParams> = {};
   if (isSuccess && params)
-    defaultValues = params;
+    defaultValues = { q: params.q };
 
   return (
     <Form

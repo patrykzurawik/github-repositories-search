@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Mona_Sans } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
@@ -26,7 +27,9 @@ export default async function RootLayout ({
       <body className={MonaSanse.variable}>
         <NextIntlClientProvider messages={messages}>
           <main className={styles.Wrapper}>
-            {children}
+            <Suspense>
+              {children}
+            </Suspense>
             <ParticlesBackground />
           </main>
         </NextIntlClientProvider>

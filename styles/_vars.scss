@@ -33,7 +33,7 @@
 @property --color-destructive {
   syntax: '<color>';
   inherits: false;
-  initial-value: #E46962;
+  initial-value: #ff2c1f;
 }
 
 @property --color-glass {
@@ -87,6 +87,12 @@
   syntax: '*';
   inherits: false;
   initial-value: .5rem;
+}
+
+@property --font-size-sm {
+  syntax: '*';
+  inherits: false;
+  initial-value: .8rem;
 }
 
 @property --font-size-lg {
