@@ -15,6 +15,7 @@ export default function ColumnOwner ({ row }: TColumnOwnerProps) {
             src={row.owner?.avatar_url}
             alt={'Avatar'}
             fill
+            sizes='100%'
             className={styles.Image}
           />
       }

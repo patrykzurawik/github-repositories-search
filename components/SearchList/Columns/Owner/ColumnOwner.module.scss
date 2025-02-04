@@ -2,6 +2,7 @@
 
 .ColumnOwner {
   @include helpers.flex(row, start, center, var(--gap-xs));
+  position: relative;
 }
 
 .Image {
