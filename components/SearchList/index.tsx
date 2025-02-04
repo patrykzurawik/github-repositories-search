@@ -37,10 +37,7 @@ export default function SearchList () {
       grow: 4,
     },
     {
-      // TODO: fix sorting if possible
       name: t('Results.list.owner'),
-      sortable: true,
-      sortField: 'owner',
       selector: (row) => row.owner?.login ?? '',
       format: (row) => <ColumnOwner row={row} />,
       grow: 1,
@@ -53,10 +50,7 @@ export default function SearchList () {
       format: (row) => <ColumnStars row={row} />,
     },
     {
-      // TODO: fix sorting if possible
       name: t('Results.list.createdAt'),
-      sortable: true,
-      sortField: 'created',
       selector: (row) => row.created_at,
       format: (row) => <ColumnCreated row={row} />,
     },
