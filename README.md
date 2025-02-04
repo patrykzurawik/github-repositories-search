@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GitHub Search
+## https://ghs-pz.vercel.app
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
+## 🚀 Project Setup
+To run the project, simply execute the following command:
+```sh
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+This will install dependencies and start the development server. No additional environment variables are required.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 How It Works
+I first divided the task into work tickets:
+- **GHS-1**: Design
+- **GHS-2**: Bootstrap app
+- **GHS-3**: Implement search
+- **GHS-4**: Implement search results list
+- **GHS-5**: Docs
+- **GHS-6**: Deployment
+- **GHS-8**: Testing & Polishing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I started with an initial design draft, then created the application skeleton. Once the basic structure was in place, I proceeded with the implementation. During development, I deployed the app to **Vercel** to ensure smooth deployment and hosting.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏗 Tech Stack
+- **TypeScript**
+- **Next.js (latest canary release) & React** (with React Compiler)
+- **react-data-table**
+- **react-hook-form**
+- **zod**
+- **next-intl**
+- **swr**
+- **SASS**
+- **octokit** (GitHub SDK)
+- **ESLint**
 
-## Learn More
+## 📌 Technical Decisions
+- The GitHub API request is implemented as a **server action with caching** for better performance.
+- Since this is a recruitment task, I chose to experiment with **React Compiler** and the latest Next.js features. However, in a real production environment:
+    - I would avoid using **React Compiler** and instead choose a stable Next.js version. I would focus of manual memoization handling.
+    - **Turbopack** might also be removed if causing DX problems.
+    - Instead of `unstable_cache`, I would handle `fetch` with Next.js caching mechanisms.
+- **No authentication** is needed since we are searching public repositories. If private repositories were required, I would add authentication - that would also extend GitHub API limits.
+- **URL state management** is sufficient for this simple app.
+- **Basic internationalization (next-intl)** is implemented for potential future use.
+- I created **custom SASS helpers** to manage styling without external UI libraries.
+- Used **swr** for efficient API data fetching.
 
-To learn more about Next.js, take a look at the following resources:
+## 🔮 Future Improvements & Considerations
+### 🫡 **ADD TESTS** (unit, integration, and e2e) 🫡 
+I originally planned to implement tests at the end of the process, but unfortunately, time ran out due to personal commitments in the coming days. TDD convention might shed a tear at this decision, but I prioritized other aspects of the app first. 
+- **Improve SEO if needed and important**:
+    - More **SSR rendering**
+    - Canonical links
+    - JSON-LD for structured data
+    - Optimized `title` and `description`
+    - Better semantic HTML
+- **Consider using GraphQL** to minimize fetched data.
+- **Enhance search validation** to fully comply with GitHub's standards (e.g., adding language filters like `language:JavaScript`).
+- **Improve UI/UX**:
+    - Advanced search filters (e.g., programming language selector, user filter)
+    - Real-time validation for the search input
+- **Validate & handle URL query parameters** more robustly.
+- **Improve responsiveness**:
+    - Consider using **Container Queries** instead of Media Queries.
+- **Integrate Sentry**:
+    - Error tracking & observability
+    - Monitoring **Core Web Vitals**
+- **Consider a more advanced state management library** like Zustand if the project scales.
+- **Enhance error handling** for a better user experience.
+- **Explore PWA support & offline mode** if needed.
+- **Check and improve accessibility** if needed:
+    - Check color contrast
+    - Ensure compatibility with color blindness
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚠️ Known Limitations
+- **Sorting by `owner` and `created_at` is not supported** (GitHub API does not provide these options, as per documentation and TypeScript SDK types).
+- **Search input validation does not trigger live feedback**, requiring a form submission attempt to display errors.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
