@@ -19,5 +19,10 @@
     &:focus-visible {
       background-color: var(--color-emphasis);
     }
+
+    &:disabled {
+      filter: brightness(80%);
+      cursor: wait;
+    }
   }
 }

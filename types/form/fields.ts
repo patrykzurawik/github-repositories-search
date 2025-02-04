@@ -8,6 +8,7 @@ export type FormFieldBase = {
   label: string;
   placeholder?: string;
   autofocus?: boolean;
+  disabled?: boolean;
 }
 
 export type FormFieldText = FormFieldBase & {

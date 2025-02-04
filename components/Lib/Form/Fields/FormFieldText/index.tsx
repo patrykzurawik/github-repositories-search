@@ -30,6 +30,7 @@ export default function FormFieldText ({
         : field.label
       }
       {...register(field.name)}
+      disabled={field.disabled}
       className={styles.Input}
     />
   );

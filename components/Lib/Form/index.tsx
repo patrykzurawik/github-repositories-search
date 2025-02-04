@@ -19,6 +19,7 @@ type FormProps = {
   schema: ZodSchema;
   onSuccess: (_formState: FormStateSuccess<z.infer<ZodSchema>>) => unknown;
   defaultValues?: Partial<z.infer<ZodSchema>>;
+  isLoading?: boolean;
   className?: string;
 }
 
@@ -27,6 +28,7 @@ export default function Form ({
   schema,
   onSuccess,
   defaultValues,
+  isLoading,
   className,
 }: FormProps) {
   const t = useTranslations();
@@ -57,7 +59,7 @@ export default function Form ({
       { fields.map((field, key) =>
         <FormField
           key={key}
-          field={field}
+          field={{ ...field, disabled: isLoading }}
           register={register}
           errors={formState.errors}
         />
@@ -67,6 +69,7 @@ export default function Form ({
         type='submit'
         aria-label={t('CTA.search')}
         className={styles.SubmitButton}
+        disabled={isLoading}
       >
         <FaSearch />
       </ButtonPrimary>

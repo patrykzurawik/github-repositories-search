@@ -1,16 +1,16 @@
 @use "styles/helpers";
 
 .ItemsCount {
-  @include helpers.flex(row, start, center, var(--gap));
+  @include helpers.flex(column, start, center, var(--gap));
 
   & {
-    flex-direction: row !important;
     justify-content: start !important;
     margin-bottom: var(--gap-xxs);
   }
 
   @include helpers.media-query-min(md) {
     & {
+      flex-direction: row !important;
       margin-bottom: var(--gap-xs);
     }
   }
