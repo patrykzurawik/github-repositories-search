@@ -4,8 +4,8 @@
     display: inline-grid;
     background:
       linear-gradient(to bottom left ,#0000 calc(50% - 1px),var(--color-accent) 0 calc(50% + 1px),#0000 0) right/50% 100%,
-      linear-gradient(to bottom right,#0000 calc(50% - 1px),var(--color-emphasis) 0 calc(50% + 1px),#0000 0) left /50% 100%,
-      linear-gradient(var(--color-emphasis) 0 0) bottom/100% 2px;
+      linear-gradient(to bottom right,#0000 calc(50% - 1px),var(--color-accent) 0 calc(50% + 1px),#0000 0) left /50% 100%,
+      linear-gradient(var(--color-accent) 0 0) bottom/100% 2px;
     background-repeat: no-repeat;
     transform-origin: 50% 66%;
     animation: animate 4s infinite linear;
