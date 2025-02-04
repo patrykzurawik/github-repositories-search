@@ -80,7 +80,7 @@ export default function SearchList () {
     if (!validationResult.isSuccess)
       return router.push(ROUTE_INDEX());
 
-    if (Object.keys(validationResult.data).length !== unsafeSearchParams.keys().toArray().length)
+    if (Object.keys(validationResult.data).length !== Array.from(unsafeSearchParams.keys()).length)
       return router.push(ROUTE_SEARCH(validationResult.data));
 
     setParams(validationResult.data);
