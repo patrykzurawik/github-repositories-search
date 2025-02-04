@@ -1,11 +1,11 @@
 @use "sass:list";
 @use "sass:map";
 
-@mixin glass-effect {
+@mixin glass-effect ($background-color: var(--color-glass), $border-color: var(--color-glass-border-color)) {
   & {
     width: 100%;
-    background: var(--color-glass);
-    border: 1px solid var(--color-glass-border);
+    background-color: $background-color;
+    border: 1px solid $border-color;
     backdrop-filter: blur(.5rem);
     padding: var(--gap-sm);
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { ROUTE_INDEX, ROUTE_SEARCH } from 'constants/routes';
+import { SEARCH_RESULTS_LIMIT } from 'constants/search';
 import { Repo } from 'lib/octokit/types/repos';
 import { useReposSearch } from 'lib/queries/repos';
 import { ReposSearchQueryParams } from 'types/repos';
@@ -14,6 +15,7 @@ import ColumnCreated from 'components/SearchList/Columns/Created';
 import ColumnName from 'components/SearchList/Columns/Name';
 import ColumnOwner from 'components/SearchList/Columns/Owner';
 import ColumnStars from 'components/SearchList/Columns/Stars';
+import ItemsCount from 'components/SearchList/ItemsCount';
 
 import styles from './SearchList.module.scss';
 
@@ -69,6 +71,9 @@ export default function SearchList () {
     ? params as ReposSearchQueryParams
     : null
   );
+  
+  const realTotalRows = Number(data?.total_count);
+  const availableTotalRows = Math.min(realTotalRows, SEARCH_RESULTS_LIMIT);
 
   useEffect(() => {
     if (!validationResult.isSuccess)
@@ -97,8 +102,12 @@ export default function SearchList () {
       onChangeRowsPerPage={onChangeRowsPerPage}
       paginationDefaultPage={params.page}
       paginationPerPage={params.per_page}
-      paginationTotalRows={data?.total_count}
+      paginationTotalRows={availableTotalRows}
       className={styles.SearchList}
-    />
+    >
+      { (realTotalRows > 0 && !isLoading)
+        && <ItemsCount totalRows={realTotalRows} />
+      }
+    </List>
   );
 }

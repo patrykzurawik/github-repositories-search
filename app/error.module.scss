@@ -1,28 +1,20 @@
 @use "styles/helpers";
 
 .ErrorBoundary {
-  @include helpers.glass-effect();
-  @include helpers.grid(row, center, center, var(--gap));
+  width: 100% !important;
+  padding: var(--gap-sm);
 
   @include helpers.media-query-min(sm) {
-    @include helpers.flex(row, space-between, center, var(--gap-xs));
+    & {
+      padding: var(--gap) !important;
+    }
   }
 }
 
-.Title {
-  @include helpers.flex(column, center, center, var(--gap-xs));
-
-  & {
-    text-align: center;
-    font-weight: bold;
-    color: var(--color-destructive);
-
-    @include helpers.media-query-min(sm) {
-      @include helpers.flex(row, center, center, var(--gap-xs));
-
-      & {
-        font-size: var(--font-size-xl);
-      }
+.Button {
+  @include helpers.media-query-min(md) {
+    & {
+      margin-left: auto;
     }
   }
 }

@@ -1,0 +1,25 @@
+@use "styles/helpers";
+
+.ItemsCount {
+  @include helpers.flex(row, start, center, var(--gap));
+
+  & {
+    flex-direction: row !important;
+    justify-content: start !important;
+    margin-bottom: var(--gap-xxs);
+  }
+
+  @include helpers.media-query-min(md) {
+    & {
+      margin-bottom: var(--gap-xs);
+    }
+  }
+}
+
+.Value {
+  @include helpers.flex(row, start, center, var(--gap-xxs));
+}
+
+.Alert {
+  font-size: var(--font-size-md);
+}

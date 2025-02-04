@@ -2,12 +2,14 @@
 
 import DataTable, { TableProps } from 'react-data-table-component';
 import { useTranslations } from 'next-intl';
+import { clsx } from 'clsx';
 
-import ItemsCount from 'components/Lib/List/ItemsCount';
 import NoData from 'components/Lib/List/NoData';
 import Spinner from 'components/Lib/Spinner';
 
-import { getTheme, styles } from './theme';
+import { getTheme, styles as customStyles } from './theme';
+
+import styles from './List.module.scss';
 
 getTheme();
 
@@ -29,6 +31,7 @@ export type TListProps <TRow = TListRow> =
   columns: TableProps<TRow>['columns'];
   isLoading?: boolean;
   onSort?: TableProps<TRow>['onSort'];
+  children?: React.ReactNode;
   className?: string;
 }
 
@@ -45,28 +48,27 @@ export default function List ({
   paginationRowsPerPageOptions = [ 10, 20, 50, 100 ],
 
   onSort,
+  children,
   className,
 }: TListProps) {
   const t = useTranslations();
-  const totalRows = paginationTotalRows ?? 0;
-  const isPending = isLoading || !Number.isSafeInteger(paginationTotalRows);
-  
+
   return (
-    <div className={className}>
-      { totalRows > 0 && <ItemsCount totalRows={totalRows} /> }
+    <div className={clsx(styles.List, className)}>
+      {children}
 
       <DataTable
         columns={columns}
         data={data}
-        progressPending={isPending}
+        progressPending={isLoading}
         progressComponent={<Spinner />}
-        noDataComponent={totalRows === 0 ?  <NoData /> : null}
+        noDataComponent={paginationTotalRows === 0 ? <NoData /> : null}
 
         onChangePage={onChangePage}
         onChangeRowsPerPage={onChangeRowsPerPage}
         pagination
         paginationServer
-        paginationTotalRows={totalRows}
+        paginationTotalRows={paginationTotalRows}
         paginationDefaultPage={Number(paginationDefaultPage)}
         paginationPerPage={Number(paginationPerPage)}
         paginationRowsPerPageOptions={paginationRowsPerPageOptions}
@@ -77,7 +79,7 @@ export default function List ({
 
         striped
         theme='ghs'
-        customStyles={styles}
+        customStyles={customStyles}
 
         { ...onSort
           ? { onSort, sortServer: true }

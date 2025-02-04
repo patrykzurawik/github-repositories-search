@@ -21,7 +21,8 @@
       "name": "Name",
       "owner": "Owner",
       "stars": "Stars",
-      "createdAt": "Created"
+      "createdAt": "Created",
+      "limitMessage": "Presenting {value} row(s) due to API limitations"
     },
     "meta": {
       "title": "GitHub Search",

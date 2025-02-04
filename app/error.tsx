@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { MdError } from 'react-icons/md';
 import { useTranslations } from 'next-intl';
 
+import Alert from 'components/Lib/Alert';
 import ButtonSecondary from 'components/Lib/Button/Secondary';
 
 import styles from './error.module.scss';
@@ -19,18 +19,13 @@ export default function Error ({
     console.error(error);
   }, [error]);
 
-  return <div
-    role='alert'
-    aria-live='assertive'
-    className={styles.ErrorBoundary}
-  >
-    <span className={styles.Title}>
-      <MdError />
-      {t('ErrorBoundary.title')}
-    </span>
-
-    <ButtonSecondary onClick={() => document.location.reload()}>
+  return <Alert type='error' className={styles.ErrorBoundary}>
+    {t('ErrorBoundary.title')}
+    <ButtonSecondary
+      onClick={() => document.location.reload()}
+      className={styles.Button}
+    >
       {t('CTA.tryAgain')}
     </ButtonSecondary>
-  </div>;
+  </Alert>;
 }
