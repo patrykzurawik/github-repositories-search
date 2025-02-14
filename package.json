@@ -6,7 +6,9 @@
     "dev": "yarn install && next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "yarn install && playwright test",
+    "test:ui": "yarn install && playwright test --ui"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.50.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

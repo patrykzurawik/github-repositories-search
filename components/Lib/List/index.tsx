@@ -3,6 +3,7 @@
 import DataTable, { TableProps } from 'react-data-table-component';
 import { useTranslations } from 'next-intl';
 import { clsx } from 'clsx';
+import { LocatorList } from 'constants/locators';
 
 import NoData from 'components/Lib/List/NoData';
 import Spinner from 'components/Lib/Spinner';
@@ -35,6 +36,7 @@ export type TListProps <TRow = TListRow> =
   isLoading?: boolean;
   children?: React.ReactNode;
   className?: string;
+  'data-ta'?: string;
 }
 
 export default function List ({ 
@@ -55,13 +57,14 @@ export default function List ({
 
   children,
   className,
+  'data-ta': dataTa,
 }: TListProps) {
   const t = useTranslations();
 
   return (
     <div
       className={clsx(styles.List, className)}
-      data-ta='List'
+      data-ta={clsx(LocatorList, dataTa)}
     >
       {children}
 

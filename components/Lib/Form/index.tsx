@@ -5,6 +5,7 @@ import { FaSearch } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { clsx } from 'clsx';
+import { LocatorForm } from 'constants/locators';
 import { FormField as FormFieldType } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
 import { z, ZodSchema } from 'zod';
@@ -21,6 +22,7 @@ type FormProps = {
   defaultValues?: Partial<z.infer<ZodSchema>>;
   isLoading?: boolean;
   className?: string;
+  'data-ta'?: string;
 }
 
 export default function Form ({
@@ -30,6 +32,7 @@ export default function Form ({
   defaultValues,
   isLoading,
   className,
+  'data-ta': dataTa,
 }: FormProps) {
   const t = useTranslations();
 
@@ -55,7 +58,7 @@ export default function Form ({
     <form 
       onSubmit={handleSubmit(onSubmit)}
       className={clsx(styles.Wrapper, !formState.isValid && 'invalid', className)}
-      data-ta='SearchForm'
+      data-ta={clsx(LocatorForm, dataTa)}
     >
       { fields.map((field, key) =>
         <FormField

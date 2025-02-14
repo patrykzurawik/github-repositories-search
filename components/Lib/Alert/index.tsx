@@ -1,5 +1,6 @@
 import { MdError, MdInfo, MdWarning } from 'react-icons/md';
 import { clsx } from 'clsx';
+import { LocatorAlert, LocatorAlertError, LocatorAlertWarning } from 'constants/locators';
 
 import styles from './Alert.module.scss';
 
@@ -33,10 +34,9 @@ export default function Alert ({
         className
       )}
       data-ta={clsx(
-        'Alert',
-        type === 'warning' && 'AlertWarning',
-        type === 'error' && 'AlertError',
-        className
+        LocatorAlert,
+        type === 'warning' && LocatorAlertWarning,
+        type === 'error' && LocatorAlertError
       )}
     >
       <Icon className={styles.Icon} />

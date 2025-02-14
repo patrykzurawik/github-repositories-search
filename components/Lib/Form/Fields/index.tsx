@@ -2,6 +2,7 @@
 
 import { FieldError, FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import { clsx } from 'clsx';
+import { LocatorFormFieldWrapper } from 'constants/locators';
 import { FormField as FormFieldType, FormFieldTypeEnum } from 'types/form/fields';
 
 import ErrorMessage from 'components/Lib/Form/Fields/ErrorMessage';
@@ -29,7 +30,7 @@ export default function FormField ({
   return (
     <div
       className={styles.FormField}
-      data-ta={clsx('SearchForm', field.name, field.type)}
+      data-ta={clsx(LocatorFormFieldWrapper, field.name, field.type)}
     >
       {fieldToRender({ field, register, error })}
       {error && <ErrorMessage>{error.message}</ErrorMessage>}

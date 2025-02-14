@@ -8,6 +8,11 @@ yarn dev
 ```
 This will install dependencies and start the development server. No additional environment variables are required.
 
+To run the E2E tests, simply execute the following command:
+```sh
+yarn test
+```
+
 ## 🛠 How It Works
 I first divided the task into work tickets:
 - **GHS-1**: Design
@@ -45,8 +50,12 @@ I started with an initial design draft, then created the application skeleton. O
 - Used **swr** for efficient API data fetching.
 
 ## 🔮 Future Improvements & Considerations
-### 🫡 **ADD TESTS** (unit, integration, and e2e) 🫡 
-I originally planned to implement tests at the end of the process, but unfortunately, time ran out due to personal commitments in the coming days. TDD convention might shed a tear at this decision, but I prioritized other aspects of the app first. 
+~~I originally planned to implement tests at the end of the process, but unfortunately, time ran out due to personal commitments in the coming days. TDD convention might shed a tear at this decision, but I prioritized other aspects of the app first.~~
+
+**UPDATE: 14.02.2025**\
+Few E2E tests have been added.
+
+- **Consider extending test coverage**
 - **Improve SEO if needed and important**:
     - More **SSR rendering**
     - Canonical links

@@ -1,6 +1,7 @@
 'use client';
 
 import { FieldError } from 'react-hook-form';
+import { LocatorFormFieldText } from 'constants/locators';
 import { FormFieldText as FormFieldTextType } from 'types/form/fields';
 
 import { FormFieldProps } from 'components/Lib/Form/Fields/index';
@@ -33,7 +34,7 @@ export default function FormFieldText ({
       disabled={field.disabled}
       autoFocus={field.autofocus}
       className={styles.Input}
-      data-ta='FormFieldText'
+      data-ta={LocatorFormFieldText}
     />
   );
 }

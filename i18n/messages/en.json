@@ -1,4 +1,5 @@
 {
+  "title": "GitHub Search",
   "CTA": {
     "search": "Search",
     "tryAgain": "Try again",
@@ -10,7 +11,6 @@
     "max": "Insert at most {value} character(s)"
   },
   "SearchRepos": {
-    "title": "GitHub Search",
     "queryLabel": "Type a repository name...",
     "meta": {
       "title": "GitHub Search",

@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { LocatorSearchList } from 'constants/locators';
 import useSearch from 'hooks/useSearch';
 import { Repo } from 'lib/octokit/types/repos';
 
@@ -79,7 +80,7 @@ export default function SearchList () {
       defaultSortAsc={params.order === 'asc'}
 
       className={styles.SearchList}
-      data-ta='SearchList'
+      data-ta={LocatorSearchList}
     >
       { (realTotalRows > 0 && !isLoading)
         && <ItemsCount totalRows={realTotalRows} />

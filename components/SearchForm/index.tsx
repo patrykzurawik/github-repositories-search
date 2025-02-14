@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { clsx } from 'clsx';
+import { LocatorSearchForm } from 'constants/locators';
 import useSearch from 'hooks/useSearch';
 import { FormField, FormFieldTypeEnum } from 'types/form/fields';
 import { FormStateSuccess } from 'types/form/state';
@@ -52,7 +53,7 @@ export default function SearchForm ({ className }: TSearchFormProps) {
       defaultValues={defaultValues}
       isLoading={isLoading}
       className={clsx(styles.SearchForm, className)}
-      data-ta='SearchForm'
+      data-ta={LocatorSearchForm}
     />
   );
 }

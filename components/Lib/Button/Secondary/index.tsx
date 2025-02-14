@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
+import { LocatorButton, LocatorButtonSecondary } from 'constants/locators';
 
 import styles from 'components/Lib/Button/Secondary/Secondary.module.scss';
 
@@ -17,7 +18,7 @@ export default function ButtonSecondary ({
   return <button
     {...rest}
     className={clsx(styles.ButtonSecondary, className)}
-    data-ta='Button ButtonSecondary'
+    data-ta={clsx(LocatorButton, LocatorButtonSecondary)}
   >
     {children}
   </button>;

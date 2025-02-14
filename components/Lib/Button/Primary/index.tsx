@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 import { clsx } from 'clsx';
+import { LocatorButton, LocatorButtonPrimary } from 'constants/locators';
 
 import styles from './ButtonPrimary.module.scss';
 
@@ -17,7 +18,7 @@ export default function ButtonPrimary ({
   return <button
     {...rest}
     className={clsx(styles.ButtonPrimary, className)}
-    data-ta='Button ButtonPrimary'
+    data-ta={clsx(LocatorButton, LocatorButtonPrimary)}
   >
     {children}
   </button>;
