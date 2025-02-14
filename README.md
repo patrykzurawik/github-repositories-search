@@ -8,6 +8,11 @@ yarn dev
 ```
 This will install dependencies and start the development server. No additional environment variables are required.
 
+To run the E2E tests, simply execute the following command:
+```sh
+yarn test
+```
+
 ## 🛠 How It Works
 I first divided the task into work tickets:
 - **GHS-1**: Design
