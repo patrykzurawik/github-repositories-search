@@ -13,6 +13,7 @@ export const LocatorAlertWarning = 'alert-warning';
 export const LocatorAlertError = 'alert-error';
 
 export const LocatorForm = 'form';
+export const LocatorFormError = 'form-error';
 
 export const LocatorList = 'list';
 
