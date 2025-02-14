@@ -36,6 +36,7 @@ export type TListProps <TRow = TListRow> =
   isLoading?: boolean;
   children?: React.ReactNode;
   className?: string;
+  'data-ta'?: string;
 }
 
 export default function List ({ 
@@ -56,13 +57,14 @@ export default function List ({
 
   children,
   className,
+  'data-ta': dataTa,
 }: TListProps) {
   const t = useTranslations();
 
   return (
     <div
       className={clsx(styles.List, className)}
-      data-ta={LocatorList}
+      data-ta={clsx(LocatorList, dataTa)}
     >
       {children}
 

@@ -36,8 +36,7 @@ export default function Alert ({
       data-ta={clsx(
         LocatorAlert,
         type === 'warning' && LocatorAlertWarning,
-        type === 'error' && LocatorAlertError,
-        className
+        type === 'error' && LocatorAlertError
       )}
     >
       <Icon className={styles.Icon} />

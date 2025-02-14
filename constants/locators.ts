@@ -1,5 +1,6 @@
 export const LocatorAppTitle = 'app-title';
 export const LocatorAppLogo = 'app-logo';
+export const LocatorAppSpinner = 'app-spinner';
 
 export const LocatorFormFieldWrapper = 'form-field-wrapper';
 export const LocatorFormFieldText = 'form-field-text';
@@ -16,6 +17,7 @@ export const LocatorForm = 'form';
 export const LocatorFormError = 'form-error';
 
 export const LocatorList = 'list';
+export const LocatorListNoData = 'list-no-data';
 
 export const LocatorSearchForm = 'search-form';
 
