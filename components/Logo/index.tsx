@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { clsx } from 'clsx';
-import { LocatorAppTitle } from 'constants/locators';
+import { LocatorAppLogo, LocatorAppTitle } from 'constants/locators';
 import LogoImage from 'public/logo.svg';
 
 import styles from './Logo.module.scss';
@@ -21,6 +21,7 @@ export default async function Logo ({ isAlternative }: TLogoProps) {
           src={LogoImage}
           alt={t('title')}
           className={styles.Image}
+          data-ta={LocatorAppLogo}
         />
         <h1
           className={styles.Name}

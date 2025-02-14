@@ -1,4 +1,5 @@
 export const LocatorAppTitle = 'app-title';
+export const LocatorAppLogo = 'app-logo';
 
 export const LocatorFormFieldWrapper = 'form-field-wrapper';
 export const LocatorFormFieldText = 'form-field-text';

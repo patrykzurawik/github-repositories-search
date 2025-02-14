@@ -22,6 +22,7 @@ type FormProps = {
   defaultValues?: Partial<z.infer<ZodSchema>>;
   isLoading?: boolean;
   className?: string;
+  'data-ta'?: string;
 }
 
 export default function Form ({
@@ -31,6 +32,7 @@ export default function Form ({
   defaultValues,
   isLoading,
   className,
+  'data-ta': dataTa,
 }: FormProps) {
   const t = useTranslations();
 
@@ -56,7 +58,7 @@ export default function Form ({
     <form 
       onSubmit={handleSubmit(onSubmit)}
       className={clsx(styles.Wrapper, !formState.isValid && 'invalid', className)}
-      data-ta={LocatorForm}
+      data-ta={clsx(LocatorForm, dataTa)}
     >
       { fields.map((field, key) =>
         <FormField
