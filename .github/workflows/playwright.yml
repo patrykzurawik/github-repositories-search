@@ -3,7 +3,7 @@ on:
   deployment_status:
 jobs:
   run-tests:
-    name: Testing ${{ github.event.deployment_status.target_url }}
+    name: Testing ${{ github.event.deployment_status.environment_url }}
     timeout-minutes: 5
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
