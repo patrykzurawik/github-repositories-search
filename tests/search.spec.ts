@@ -117,7 +117,7 @@ test.describe('SearchPage:Results', async () => {
   });
 
   test('is presenting spinner and empty results list', async ({ page }) => {
-    const q = 'totallyNonExistingNameRandom123...****';
+    const q = 'totallyNonExistingNameRandom2137....****' + Date.now();
 
     await page.goto(ROUTE_SEARCH({ q }));
     expect(page.url()).toContain(ROUTE_SEARCH({ q }));
