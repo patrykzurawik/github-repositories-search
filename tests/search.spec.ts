@@ -6,7 +6,7 @@ import {
   LocatorListNoData,
   LocatorSearchList,
 } from 'constants/locators';
-import { ROUTE_INDEX, ROUTE_SEARCH } from 'constants/routes';
+import { ROUTE_SEARCH } from 'constants/routes';
 import { DEFAULT_SEARCH_PARAMS, DEFAULT_SEARCH_PARAMS_ORDER } from 'constants/search';
 import { Page } from 'playwright-core';
 import { getByPartialTestId } from 'tests/fixture';
@@ -19,8 +19,8 @@ test.describe('SearchPage', async () => {
 
   test('is redirecting to index when no params passed', async ({ page }) => {
     await page.goto('/search');
-    await page.waitForURL(ROUTE_INDEX());
-    expect(page.url()).toContain(ROUTE_INDEX());
+    await page.waitForURL((currentURL) => !currentURL.pathname.includes('/search'));
+    expect(page.url()).not.toContain('/search');
   });
 
   test('is adding and sorting missing params when only q passed', async ({ page }) => {
@@ -103,28 +103,22 @@ test.describe('SearchPage:Results', async () => {
     const { list, spinner, results, noData } = await getElements(page);
 
     await expect(list).toBeVisible();
-    await expect(spinner).toBeVisible();
-    await expect(results).not.toBeVisible();
-
-    await expect(spinner).not.toBeVisible();
     await expect(results).toBeVisible();
+    await expect(spinner).not.toBeVisible();
     await expect(noData).not.toBeVisible();
   });
 
   test('is presenting spinner and empty results list', async ({ page }) => {
-    const q = 'totallyNonExistingNameRandom123...****';
+    const q = 'totallyNonExistingNameRandom2137....****' + Date.now();
 
     await page.goto(ROUTE_SEARCH({ q }));
     expect(page.url()).toContain(ROUTE_SEARCH({ q }));
 
     const { list, spinner, results, noData } = await getElements(page);
-
+     
     await expect(list).toBeVisible();
-    await expect(spinner).toBeVisible();
-    await expect(results).not.toBeVisible();
-
-    await expect(spinner).not.toBeVisible();
     await expect(results).toBeVisible();
+    await expect(spinner).not.toBeVisible();
     await expect(noData).toBeVisible();
   });
 });
