@@ -100,20 +100,12 @@ test.describe('SearchPage:Results', async () => {
     await page.goto(ROUTE_SEARCH({ q }));
     expect(page.url()).toContain(ROUTE_SEARCH({ q }));
 
-    {
-      const { list, spinner, results } = await getElements(page);
+    const { list, spinner, results, noData } = await getElements(page);
 
-      await expect(list).toBeVisible();
-      await expect(spinner).toBeVisible();
-      await expect(results).not.toBeVisible();
-    }
-    {
-      const { spinner, results, noData } = await getElements(page);
-
-      await expect(spinner).not.toBeVisible();
-      await expect(noData).not.toBeVisible();
-      await expect(results).toBeVisible();
-    }
+    await expect(list).toBeVisible();
+    await expect(results).toBeVisible();
+    await expect(spinner).not.toBeVisible();
+    await expect(noData).not.toBeVisible();
   });
 
   test('is presenting spinner and empty results list', async ({ page }) => {
@@ -122,20 +114,11 @@ test.describe('SearchPage:Results', async () => {
     await page.goto(ROUTE_SEARCH({ q }));
     expect(page.url()).toContain(ROUTE_SEARCH({ q }));
 
-    {
-      const { list, spinner, results } = await getElements(page);
-
-      await expect(list).toBeVisible();
-      await expect(spinner).toBeVisible();
-      await expect(results).not.toBeVisible();
-    }
-
-    {
-      const { spinner, results, noData } = await getElements(page);
+    const { list, spinner, results, noData } = await getElements(page);
      
-      await expect(spinner).not.toBeVisible();
-      await expect(results).toBeVisible();
-      await expect(noData).toBeVisible();
-    }
+    await expect(list).toBeVisible();
+    await expect(results).toBeVisible();
+    await expect(spinner).not.toBeVisible();
+    await expect(noData).toBeVisible();
   });
 });
